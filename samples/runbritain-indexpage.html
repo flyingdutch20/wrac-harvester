@@ -1,0 +1,1413 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><title>
+	Results Lookup
+</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="description" content="runbritain Rankings: Find out where your times put you in the UK and enjoy features like our runbritain Handicap and performance graphs." /><meta name="keywords" content="running, road running, rankings, runbritain, handicap, british, athlete, 10K, half marathon, marathon" /><link rel="stylesheet" href="/stylesheets/rb2.css" type="text/css" /><link rel="stylesheet" href="/stylesheets/rd.css" type="text/css" /><link rel="stylesheet" href="/stylesheets/rewards.css" type="text/css" /><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="/js/excanvas.min.js"></script><![endif]-->
+
+    <script language="javascript" type="text/javascript" src="/js/jquery.flot2.js"></script>
+
+    <script language="javascript" type="text/javascript" src="/js/jquery.tablesorter.min.js"></script>
+
+    <script type="text/javascript" src="/js/jquery.rd.js"></script>
+
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+
+    <script src="https://www.google.com/uds/solutions/dynamicfeed/gfdynamicfeedcontrol.js"
+        type="text/javascript"></script>
+
+    <script type="text/javascript">
+        google.load('feeds', '1');
+
+        function OnLoad() {
+            var feeds = [
+    {
+        title: 'News',
+        url: 'https://www.runbritain.com/Rss.aspx?itemtype=news'
+    }
+
+  ];
+
+            var options = {
+                numResults: 5,
+                displayTime: 8000,
+                stacked: false,
+                horizontal: false,
+                title: "Latest on runbritain"
+            };
+
+            new GFdynamicFeedControl(feeds, 'feed', options);
+        }
+
+        google.setOnLoadCallback(OnLoad);    
+    
+    </script>
+
+    <script type='text/javascript'>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        (function() {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+'//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        })();
+    </script>
+
+    <script type='text/javascript'>
+        /*googletag.cmd.push(function() {
+        googletag.defineSlot('/4320101/RunBritainRankings-Banner', [468, 60], 'div-gpt-ad-1348653716773-0').addService(googletag.pubads());
+        googletag.defineSlot('/4320101/RunBritainRankings-Button', [120, 90], 'div-gpt-ad-1348653716773-1').addService(googletag.pubads());
+        googletag.defineSlot('/4320101/RunBritainRankings-Leaderboard', [728, 90], 'div-gpt-ad-1348653716773-2').addService(googletag.pubads());
+        googletag.defineSlot('/4320101/RunBritainRankings-MPU', [300, 250], 'div-gpt-ad-1348653716773-3').addService(googletag.pubads());
+        googletag.defineSlot('/4320101/RunBritainRankings-Sky', [120, 600], 'div-gpt-ad-1348653716773-4').addService(googletag.pubads());
+        googletag.defineSlot('/4320101/RunBritainRankings-WideSky', [160, 600], 'div-gpt-ad-1348653716773-5').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+        });*/
+        googletag.cmd.push(function() {
+            googletag.defineSlot('/4320101/RunBritain-Banner', [468, 60], 'div-gpt-ad-1347609131422-0').addService(googletag.pubads());
+            googletag.defineSlot('/4320101/RunBritain-Button', [120, 90], 'div-gpt-ad-1347609131422-1').addService(googletag.pubads());
+            googletag.defineSlot('/4320101/RunBritain-Leaderboard', [728, 90], 'div-gpt-ad-1347609131422-2').addService(googletag.pubads());
+            googletag.defineSlot('/4320101/RunBritain-Sky', [120, 600], 'div-gpt-ad-1347609131422-3').addService(googletag.pubads());
+            googletag.defineSlot('/4320101/RunBritain-WideSky', [160, 600], 'div-gpt-ad-1347609131422-4').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    
+    
+</head>
+<body>
+    <form method="post" action="./resultslookup.aspx" onsubmit="javascript:return WebForm_OnSubmit();" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'cphBody_btnLookup')" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTM5NzQyMzE0MA9kFgJmD2QWBAIDD2QWAgIBDxYCHgVhbGlnbgUGY2VudGVyFgICAQ8WAh4Fd2lkdGgFBTk3NXB4FgJmD2QWAmYPZBYEAgEPZBYGAg0PDxYCHgdWaXNpYmxlaBYCHgdvbmNsaWNrBThyZXR1cm4gZm5BcmVZb3VTdXJlKCdBcmUgeW91IHN1cmUgeW91IHdhbnQgdG8gbG9nb3V0ID8nKWQCDw8PFgIeBFRleHQFXkZvcmdvdHRlbiB5b3VyIGxvZ2luIGRldGFpbHM/IDxhIGhyZWY9Ii91c2VyL3VzZXJwYXNzd29yZHJlc2V0cmVxdWVzdC5hc3B4Ij5SZXNldCBwYXNzd29yZDwvYT5kZAIRDxYCHwQFE0NsYWltIHlvdXIgSGFuZGljYXBkAgMPZBYEAhMPEGQPFgMCBwIIAgkWAxBkZGgQZGRoEGRkaBYBZmQCGQ8WAh8EBbABPGEgY2xhc3M9IlJlc3VsdHNMb29rdXBEYXRlTGlua05vcm1hbCIgb25jbGljaz0iZm5TZXREYXRlcygnMiBOb3YgMjAxOCcsICcxNiBOb3YgMjAxOCcsICcyMDE4Jyk7IiBvbm1vdXNlb3Zlcj0iZm5Pbk1vdXNlT3Zlcih0aGlzKTsiIG9ubW91c2VvdXQ9ImZuT25Nb3VzZU91dCh0aGlzKTsiPlJlY2VudDwvYT5kAgUPZBYCZg8WAh8EBZYDPHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPg12YXIgZ2FKc0hvc3QgPSAoKCJodHRwczoiID09IGRvY3VtZW50LmxvY2F0aW9uLnByb3RvY29sKSA/ICJodHRwczovL3NzbC4iIDogImh0dHA6Ly93d3cuIik7DWRvY3VtZW50LndyaXRlKHVuZXNjYXBlKCIlM0NzY3JpcHQgc3JjPSciICsgZ2FKc0hvc3QgKyAiZ29vZ2xlLWFuYWx5dGljcy5jb20vZ2EuanMnIHR5cGU9J3RleHQvamF2YXNjcmlwdCclM0UlM0Mvc2NyaXB0JTNFIikpOw08L3NjcmlwdD4NPHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPg10cnkgew12YXIgcGFnZVRyYWNrZXIgPSBfZ2F0Ll9nZXRUcmFja2VyKCJVQS04MjA3OTAxLTciKTsNcGFnZVRyYWNrZXIuX3RyYWNrUGFnZXZpZXcoKTsNfSBjYXRjaChlcnIpIHt9PC9zY3JpcHQ+DWQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFGmN0bDAwJGJhbm5lciRjaGtSZW1lbWJlck1lgnGlAQD4NbulfLmHx+EPXG0XkPTEqZVZONI8Pz7azmw=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=17kP-UGvfQE48qK9UvXAMwksmv-wyFmnFk93nmmaAwgMbvul7sR1ZuWDJDzRLyWXhSjxv7aZY18QvnW6FwyupqajXqjKtORhQfUwJzFgwUA1&amp;t=635793063765829480" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+function fnSetDates(myDateFrom, myDateTo, myYear) {
+    document.getElementById("cphBody_txtDateFrom").value = myDateFrom;
+    document.getElementById("cphBody_txtDateTo").value = myDateTo;
+    document.getElementById("cphBody_ddlYearOfPerf").value = myYear;
+    return (true);
+}
+</script>
+<script language="javascript" type="text/javascript">
+function fnResetDatesToRecent() {
+
+    fnSetDates(document.getElementById("cphBody_hidRecentDateFrom").value, document.getElementById("cphBody_hidRecentDateTo").value, document.getElementById("cphBody_hidRecentYear").value);
+    return (true);
+}
+</script>
+
+<script language="javascript" type="text/javascript">
+
+function fnAreYouSure(strMessage) { 
+    if (confirm(strMessage)) {
+        return(true);
+    } 
+    else {
+        return(false);
+    } 
+}
+
+</script>
+<script src="/WebResource.axd?d=H0afnJ5z59fPogThbestc7LrbrlFfm3srvyu8TTFxokOwDWnJxahVzpgXwHd2X7OCx5Eg0DeeF-MOad0q-ySKEdO4CmSIs9Gt2WcnssQoDw1&amp;t=635793063765829480" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0AE4AF" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAF2rfvDQtoLReGUczlM1IeTIVgiRa+Ck6Skj7uv4bP83L79G4uluF6q3ur81q5yYP5dwbHtrMmfbQaoWKtWM7/4UJ7/QPpCW3USfbvZI9vOo3kRtQoHLM5hpgip1jGCx+LVA+/vGr6COPteBRb5ZMgUmiS1L5NJ9i9/8dqm20SCOJfxx2IGg+jpD9mVvLMbc+uzsEKVcu7OplwZOO+RQDOEhDPD4BOE5kQG7tFLmh91vZ9x/GfZSooE0cZ8sI1WWtk2toVPkLdbag4yXQfKqWR3uCafI4ti3iv1zS+H1MYJnwx3IWy12eR56s6FQd8deRU9X25CzQkI51w92riPVLm+riqXmhh8xgx6pHlruU3d1HkPo26tM/teELWjghCb7VMBd0wE6We7Ot6TUGmvlD7JenGmkwsfLNEiYHAik33NjEJix39uc7yKCU0fcXpEZ0NTTySeaNmejhalmNAUUeFEOxIUWQmdTP0pz8keWSYA0wchPR6A2QuPp3TlXadVrUQJEHArYVMRu1AzEzqXYdEoOLq3Q0Z7fLK2rIvemewfOaIX251HamLzdWN/7x1kFr/lfN9s0fSsF1YGJJ8kdCBvvnwPN3dqoGfGhUT1COVZRmFdWOYsdRqg+y7RhMVTnW71C/3vm5/wlMtQCHeWFgRlqAiorm+yzbqHf1AxCTSMlqXnFxxJ1O3Jbn4S6Bk89LIO0rh1u6HeyyDEqzPDqi66Q8kEDa+Rv0jA5wRyH50Xm0dBm7GRAGX6AE+JOQ7PxPZSh3Ch/34Ibj8Cr3n7U15zlGrxNrJ46yAXVgQJLGKOz4ZadLLfD6ZKg/pyPbPeL6L9sZhzMp0QtUtKA1ZW7z/CzRbdv43z8808Bm9lp4UC2UkjLr6InFLIwu9hTvUFAOK/gOYHJx5qVvvxDFCCpx/Osxc+zYkBLF3elkEvYe8xZ9YDrfkEjvhHTE7AmUZXKHPN2SXnv/dh9VBU0Pvd6SbgNaVHL/WohmsODaDeBRcwJjhofHPhkamXyWcTTOYLSJ7PY7J1h8pBwQCT8V0ruqOarrzndeziGmDQorp7WaEdc3V5cFxtJVg1IZXzoBk7/JKQEZOZJiYH5vg9hJzvDzgqF2OeV1yEUW9gKt0/zLN3tRGO9KuvKOYFTz6rjuJWiivVE//Svnl5ijZ0aGZ/lJEc06vVJlYQseP4Y0z4654M4dW1vnNflNyqvAwoWPas78S6itlkE+v+h5NKX7bq7ySdgM8IBKLkJhrUu7Ztl0PKga0O107nRWB6GFBONcCWevmM+oAiRkLruXXDeiKnG1iX8OjTyhDQII3WreGUH9/P9D/lWtRODCrMmK6I8I4IKfHBsq9oRCx4JfE3APwHvKz4E98F6SpIO2co8fXx0DKrPq1pxO5sKXn84W4CrKDh2YZ+uvxNU3WTEGOPYqRCB92p5OHWPEn6wv0p46ZYb1ApUtCGhK+UxKZGtfDi1TRF9t6rpbORNheGzaPTHUiNgoVs/43tNEFhEBQNDGzNNeCyAAfB0ZL0io+iD1DFI9fx9zLkwkt4eqKiacRxDHM/fcrOQq2u+Wv0znpxhyS/ntZJL1bO22y0MIbw+0BPwb8eQsH6x2wmbjPqpGdvRnL+HxULj/+DwVwnAadWp7e03P+NWcfYmS33QxQ6z2Ss1qwfYl4QCRcYFkmGDgBtf9F+KP/mX5F/CORuT5kh0TQCfx3VYjxCm87ufWB+dqM4Vg2SMo6xp4piJMpLE50hcYunxcTiJDI/l68DtB5uyiradHYwJczMM0RKXdKCgo7Z9GFtbFwOVJlyV3xSRikTwsSYHHe17TMtf1gD+9fuAxbU+rzpKEcmwyvHmFioMVRqEr8H5gHOG6CYCO8qSCqjpdW3owQFHLQr5CbwWeQvnE+HFJi926MlMZv7kpldhQxdX9D0WyY+RApVVcKpspwL6i8zC/PcinpMCayQEdmiZvs/e7phEZIKGpRjo702uysi7iMUllITGo0I0Of5NNSwd1qDDcUjQvedgeJ17+lxX/1d7MjxmxQ==" />
+</div>
+    <div class="page">
+        <div id="wrapper">
+            <!--<div id="divMain" align="center">
+        <div id="wrapper" align="left">
+            <table id="tblMain" width="975px" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>-->
+            
+<div id="header">
+    <div class="header-m">
+        <strong class="logo"><a href="http://www.runbritain.com">runbritain - we are road running</a></strong>
+        <div class="top-holder">
+            <div class="top-box">
+                <div class="login">
+                    <div id="login-inputs" style="float: left; margin-right: 20px; width: 306px">
+                        <div id="login-input-email" style="margin-bottom: 10px; overflow: hidden">
+                            <span style="display: block; float: left; width: 80px">Email:</span>
+                            <input name="ctl00$banner$txtEmail" type="text" maxlength="50" id="banner_txtEmail" style="width: 220px; float: left;
+                                margin: 0" /><span id="banner_rfvEmail" style="display:none;"></span></div>
+                        <div id="login-input-pass" style="overflow: hidden">
+                            <span style="display: block; float: left; width: 80px">Password:</span>
+                            <input name="ctl00$banner$txtPassword" type="password" maxlength="20" id="banner_txtPassword" style="width: 220px;
+                                float: left; margin: 0" /><span id="banner_rfvPassword" style="display:none;"></span></div>
+                        <span id="banner_lblErrorMessage" style="color:Red;"></span><div id="banner_vsLogin" style="display:none;">
+
+		</div>
+                    </div>
+                    <div id="login-btn" style="float: left;">
+                        Remember Me:<input id="banner_chkRememberMe" type="checkbox" name="ctl00$banner$chkRememberMe" />
+                        <input type="submit" name="ctl00$banner$btnLogin" value="Login" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$banner$btnLogin&quot;, &quot;&quot;, true, &quot;Login&quot;, &quot;&quot;, false, false))" id="banner_btnLogin" class="more" style="margin-left: 25px; -moz-border-radius: 5px; border-radius: 5px" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="oldlogin" style="width: 428px">
+                        <span id="banner_lblUserOption">Forgotten your login details? <a href="/user/userpasswordresetrequest.aspx">Reset password</a></span>
+                    </div>
+                    <div class="socials">
+                        <ul>
+                            <li><a class="facebook" target="_blank" href="http://www.facebook.com/runbritain">Facebook</a></li>
+                            <li><a class="twitter" target="_blank" href="http://twitter.com/runbritain">Twitter</a></li>
+                            <li><a class="youtube" target="_blank" href="http://www.youtube.com/user/runbritainonline">
+                                YouTube</a></li>
+                        </ul>
+                    </div>
+                    <!-- End socials -->
+                </div>
+                <!-- End row -->
+            </div>
+            <!-- End top-box -->
+        </div>
+        <!-- End top-holder -->
+    </div>
+    <!-- End header-m -->
+    <div class="header-b">
+    </div>
+</div>
+<!-- End header -->
+<div id="main">
+
+    <script type="text/javascript">
+        $(function() {
+            if (document.location.href.indexOf('claimhandicap') > -1) {
+                $('li#navclaim').addClass("active");
+            }
+            if (document.location.href.indexOf('runners') > -1) {
+                $('li#navrunners').addClass("active");
+            }
+            if (document.location.href.indexOf('results') > -1) {
+                $('li#navresults').addClass("active");
+            }
+            if ((document.location.href.indexOf('/rankings') > -1) && (document.location.href.indexOf('ladder') == -1)) {
+                $('li#navrankings').addClass("active");
+            }
+            if (document.location.href.indexOf('reward') > -1) {
+                $('li#navrewards').addClass("active");
+            }
+            if ((document.location.href.indexOf('/rankings') > -1) && (document.location.href.indexOf('ladder') > -1)) {
+                $('li#navladder').addClass("active");
+            }
+
+        });</script>
+
+    <ul id="nav">
+        <li id=""><a href="/"><span>Home</span></a></li>
+        <li id="navclaim"><a href="/user/claimhandicap.aspx"><span>
+            Claim your Handicap</span></a></li>
+        <li id="navrunners"><a href="/runners/"><span>Runners</span></a></li>
+        <li id="navresults"><a href="/results/"><span>Results</span></a></li>
+        <li id="navrankings"><a href="/rankings/"><span>Rankings</span></a></li>
+        <li id="navrewards"><a href="/rewardrunning/leaderboard2018.aspx"><span>Reward Running</span></a></li>
+        <li id="navladder"><a href="/rankings/ladderlist.aspx"><span>National Ladder</span></a></li>
+    </ul>
+    <!-- Home page slider	code goes here only on home page -->
+    <div class="main-block2">
+        <div class="mb2-t">
+        </div>
+        <div class="mb2-m">
+            <div class="inside">
+
+            
+    <script language="javascript" type="text/javascript">
+
+        function fnOnMouseOver(element) {
+
+            // only change class if not already selected    
+            if (element.className == 'ResultsLookupDateLinkNormal') {
+                element.className = 'ResultsLookupDateLinkHover';
+            }
+
+            return (true);
+        }
+
+        function fnOnMouseOut(element) {
+
+            // only change class if not already selected    
+            if (element.className == 'ResultsLookupDateLinkHover') {
+                // revert to normal
+                element.className = 'ResultsLookupDateLinkNormal';
+            }
+
+            return (true);
+        }
+
+    </script>
+  <div id="content-top-holder">    
+    <h2>
+        Results</h2>
+    <p><strong>We include all races with UKA race licences.<br />For more details <a href="http://www.runbritain.com/race-directors-club">click here</a>.</strong></p>
+</div>
+  <div id="content-a-holder">    
+<!-- RunBritainRankings-Banner -->
+
+</div>
+<div class="contet-break"></div>
+
+
+    <table style="background-color: transparent;" width="100%">
+        <tr>
+            <td style="width: 40px">
+                <b>Event</b>
+            </td>
+            <td>
+                <select name="ctl00$cphBody$ddlEventCode" id="cphBody_ddlEventCode" style="font-size:100%;">
+			<option value="">Any</option>
+			<option value="5K">5K</option>
+			<option value="10K">10K</option>
+			<option value="HM">Half Marathon</option>
+			<option value="Mar">Marathon</option>
+			<option value="">--------</option>
+			<option value="parkrun">parkrun</option>
+			<option value="5M">5 Miles</option>
+			<option value="10M">10 Miles</option>
+			<option value="20M">20 Miles</option>
+			<option value="">--------</option>
+			<option value="1M">1 Mile</option>
+			<option value="3K">3K</option>
+			<option value="2M">2 Miles</option>
+			<option value="4K">4K</option>
+			<option value="2.5M">2.5 Miles</option>
+			<option value="3M">3 Miles</option>
+			<option value="3.5M">3.5 Miles</option>
+			<option value="6K">6K</option>
+			<option value="4M">4 Miles</option>
+			<option value="7K">7K</option>
+			<option value="8K">8K</option>
+			<option value="6M">6 Miles</option>
+			<option value="9K">9K</option>
+			<option value="11K">11K</option>
+			<option value="7M">7 Miles</option>
+			<option value="12K">12K</option>
+			<option value="13K">13K</option>
+			<option value="8M">8 Miles</option>
+			<option value="14K">14K</option>
+			<option value="9M">9 Miles</option>
+			<option value="15K">15K</option>
+			<option value="20K">20K</option>
+			<option value="15M">15 Miles</option>
+			<option value="25K">25K</option>
+			<option value="16M">16 Miles</option>
+			<option value="17M">17 Miles</option>
+			<option value="30K">30K</option>
+			<option value="21M">21 Miles</option>
+			<option value="22M">22 Miles</option>
+			<option value="50K">50K</option>
+			<option value="100K">100K</option>
+			<option value="12H">12 Hours</option>
+			<option value="24H">24 Hours</option>
+
+		</select>
+            </td>
+            <td style="width: 40px">
+                <b>Race</b>
+            </td>
+            <td>
+                <input name="ctl00$cphBody$txtMeeting" type="text" maxlength="60" id="cphBody_txtMeeting" title="Use * to do wildcard searches" style="font-size:100%;width:180px;" />
+            </td>
+            <td style="width: 50px">
+                <b>Venue</b>
+            </td>
+            <td>
+                <input name="ctl00$cphBody$txtVenue" type="text" maxlength="30" id="cphBody_txtVenue" title="Use * to do wildcard searches" style="font-size:100%;width:200px;" />
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40px">
+                <b>Date</b>
+            </td>
+            <td>
+                <input name="ctl00$cphBody$txtDateFrom" type="text" value="2 Nov 2018" maxlength="20" id="cphBody_txtDateFrom" style="font-size:100%;width:72px;" />
+                <b>to</b>
+                <input name="ctl00$cphBody$txtDateTo" type="text" value="16 Nov 2018" maxlength="20" id="cphBody_txtDateTo" title="To search over a date range enter the date to in this box" style="font-size:100%;width:72px;" />
+            </td>
+            <input type="hidden" name="ctl00$cphBody$hidRecentDateFrom" id="cphBody_hidRecentDateFrom" value="2 Nov 2018" />
+            <input type="hidden" name="ctl00$cphBody$hidRecentDateTo" id="cphBody_hidRecentDateTo" value="16 Nov 2018" />
+            <input type="hidden" name="ctl00$cphBody$hidRecentYear" id="cphBody_hidRecentYear" value="2018" />
+            <td style="width: 40px">
+                <b>Year</b>
+            </td>
+            <td>
+                <select name="ctl00$cphBody$ddlYearOfPerf" id="cphBody_ddlYearOfPerf" style="font-size:100%;">
+			<option selected="selected" value="2018">2018</option>
+			<option value="2017">2017</option>
+			<option value="2016">2016</option>
+			<option value="2015">2015</option>
+			<option value="2014">2014</option>
+			<option value="2013">2013</option>
+			<option value="2012">2012</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+			<option value="2003">2003</option>
+			<option value="2002">2002</option>
+			<option value="2001">2001</option>
+			<option value="2000">2000</option>
+			<option value="1999">1999</option>
+			<option value="1998">1998</option>
+			<option value="1997">1997</option>
+			<option value="1996">1996</option>
+			<option value="1995">1995</option>
+			<option value="1994">1994</option>
+			<option value="1993">1993</option>
+			<option value="1992">1992</option>
+			<option value="1991">1991</option>
+			<option value="1990">1990</option>
+			<option value="1989">1989</option>
+
+		</select>
+            </td>
+            <td style="width: 50px">
+                <b>Terrain</b>
+            </td>
+            <td>
+                <select name="ctl00$cphBody$ddlTerrainTypeCode" id="cphBody_ddlTerrainTypeCode" style="font-size:100%;">
+			<option selected="selected" value="RM">Road/Multi</option>
+			<option value="P">parkrun</option>
+			<option value="R">Road</option>
+			<option value="M">Multi</option>
+			<option value="TI">Track</option>
+			<option value="X">XC</option>
+			<option value="RMPTIX">All</option>
+
+		</select>
+                <input type="submit" name="ctl00$cphBody$btnLookup" value="Lookup" id="cphBody_btnLookup" />&nbsp;
+                <input type="submit" name="ctl00$cphBody$btnReset" value="Reset" id="cphBody_btnReset" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 40px">
+                <b><a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('2 Nov 2018', '16 Nov 2018', '2018');" onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Recent</a></b>
+            </td>
+            <td colspan="6">
+                <b><a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('', '', '2018');" onmouseover="fnOnMouseOver(this);"
+                    onmouseout="fnOnMouseOut(this);">2018</a></b> <a class="ResultsLookupDateLinkNormal"
+                        onclick="fnSetDates('1 Jan 2018', '31 Jan 2018', '2018');" onmouseover="fnOnMouseOver(this);"
+                        onmouseout="fnOnMouseOut(this);">Jan</a> <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Feb 2018', '28 Feb 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Feb</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Mar 2018', '31 Mar 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Mar</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Apr 2018', '30 Apr 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Apr</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 May 2018', '31 May 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">May</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Jun 2018', '30 Jun 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Jun</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Jul 2018', '31 Jul 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Jul</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Aug 2018', '31 Aug 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Aug</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Sep 2018', '30 Sep 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Sep</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Oct 2018', '31 Oct 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Oct</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Nov 2018', '30 Nov 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Nov</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Dec 2018', '31 Dec 2018', '2018');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Dec</a>&nbsp;
+                <b><a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('', '', '2017');" onmouseover="fnOnMouseOver(this);"
+                    onmouseout="fnOnMouseOut(this);">2017</a></b> <a class="ResultsLookupDateLinkNormal"
+                        onclick="fnSetDates('1 Jan 2017', '31 Jan 2017', '2017');" onmouseover="fnOnMouseOver(this);"
+                        onmouseout="fnOnMouseOut(this);">Jan</a> <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Feb 2017', '28 Feb 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Feb</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Mar 2017', '31 Mar 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Mar</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Apr 2017', '30 Apr 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Apr</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 May 2017', '31 May 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">May</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Jun 2017', '30 Jun 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Jun</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Jul 2017', '31 Jul 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Jul</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Aug 2017', '31 Aug 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Aug</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Sep 2017', '30 Sep 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Sep</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Oct 2017', '31 Oct 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Oct</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Nov 2017', '30 Nov 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Nov</a>
+                <a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('1 Dec 2017', '31 Dec 2017', '2017');"
+                    onmouseover="fnOnMouseOver(this);" onmouseout="fnOnMouseOut(this);">Dec</a>&nbsp;
+                <b><a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('', '', '2016');" onmouseover="fnOnMouseOver(this);"
+                    onmouseout="fnOnMouseOut(this);">2016</a></b>&nbsp;
+                <b><a class="ResultsLookupDateLinkNormal" onclick="fnSetDates('', '', '2015');" onmouseover="fnOnMouseOver(this);"
+                    onmouseout="fnOnMouseOut(this);">2015</a></b>&nbsp;
+                <b><a href="http://www.runbritain.com/races">Online Entry</a></b>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table>
+        <tr>
+            <td>
+                <span id="cphBody_lblErrorMessage" style="color:Red;"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span id="cphBody_lblRecentResultsHeader"><b>Recent Results</b></span>
+            </td>
+        </tr>
+    </table>
+    <table cellspacing="0" cellpadding="2" id="cphBody_dgMeetings" style="font-size:90%;width:100%;border-collapse:collapse;">
+			<tr style="background-color:Transparent;font-weight:bold;">
+				<td>Date</td><td>Race (External Results Link)</td><td>Venue</td><td align="center">Type</td><td align="center">Results</td><td>&nbsp;</td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 16 Nov 2018</td><td>
+                    <a href="https://my6.raceresult.com/98676/results?lang=en#1_976D39" target="_blank">Abh Dhabi Striders Half Marathon</a>
+                    
+                </td><td>Abu Dhabi, UAE</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266384">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266384" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 16 Nov 2018</td><td>
+                    <a href="https://my6.raceresult.com/112380/results?lang=en#1_7AAEAD" target="_blank">Hell of a Hill Marathon Day 3 - Live Update Active</a>
+                    
+                </td><td>Rivington</td><td align="center">Multi</td><td align="center">&nbsp;</td><td><a href="/submit/submitmeeting.aspx?meetingid=240177" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Thu 15 Nov 2018</td><td>
+                    <a href="https://my4.raceresult.com/112379/results?lang=en#1_7AAEAD" target="_blank">Hell of a Hill Marathon Day 2</a>
+                    
+                </td><td>Rivington</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=240176">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=240176" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Thu 15 Nov 2018</td><td>
+                    <a href="https://chiptimingsolutions.com/results/result.html?race=241#1_35FA9D" target="_blank">Henlow 10 (Inc RAF Championships)</a>
+                    
+                </td><td>RAF Henlow</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261027">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261027" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Wed 14 Nov 2018</td><td>
+                    <a href="http://armadaathletics.co.uk/wp-content/uploads/2018/11/3K-Winter-Series-Nov-18.pdf" target="_blank">Armada Athletics Network Winter 3K Series</a>
+                    
+                </td><td>Plymouth</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=257763">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=257763" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Wed 14 Nov 2018</td><td>
+                    <a href="https://my5.raceresult.com/112370/results?lang=en#1_7AAEAD" target="_blank">Hell of a Hill Marathon Day 1</a>
+                    
+                </td><td>Rivington</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=240175">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=240175" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Wed 14 Nov 2018</td><td>
+                    <a href="https://www.wellscityharriers.co.uk/images/stories/aa2018race2.pdf" target="_blank">Street 5K Series</a>
+                    
+                </td><td>Street</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=257769">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=257769" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Mon 12 Nov 2018</td><td>
+                    <a href="https://www.runningmiles.co.uk/drr-2018" target="_blank">Dorney River Run 6-Hour</a>
+                    
+                </td><td>Eton</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260924">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260924" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.athensauthenticmarathon.gr/site/index.php/en/results-en/560-results-2018-10km-road-race-wind" target="_blank">Athens Authentic Marathon 10K</a>
+                    
+                </td><td>Athens, GRE</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266329">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266329" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://track.myrace.gr/iresultsr.aspx?id=1785" target="_blank">Athens Marathon</a>
+                    
+                </td><td>Athens, GRE</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265351">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265351" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.beckenhamrunning.co.uk/wp-content/uploads/2018/11/BRC-Trail-Race-2018-Results.pdf" target="_blank">Beckenham Charity 10K</a>
+                    
+                </td><td>Beckenham</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=261022">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261022" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.bordersleague.org.uk/wp-content/uploads/2018/11/finresults2018-19R2.html" target="_blank">Borders League 5</a>
+                    
+                </td><td>Upton</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265204">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265204" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.nice-work.org.uk/races/coalville-10k/2018" target="_blank">Coalville 10K</a>
+                    
+                </td><td>Snibston</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261018">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261018" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.ukresults.net/2018/dalby.html" target="_blank">Dalby Dash 10K</a>
+                    
+                </td><td>Low Dalby</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=261023">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261023" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://racetecresults.com/results.aspx?CId=16586&RId=327" target="_blank">Draycote Water Winter 10K Series</a>
+                    
+                </td><td>Kites Hardwick</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=223523">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=223523" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/261025_46253_11112018175147_George.xlsx" target="_blank">George Munday 10K</a>
+                    
+                </td><td>Leverington</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261025">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261025" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.resultsbase.net/event/4488/results" target="_blank">Heaton Harriers Memorial 10K</a>
+                    
+                </td><td>Newcastle upon Tyne</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261020">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261020" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://runsignup.com/Race/Results/48783/#resultSetId-123509" target="_blank">Honor our Veterans 5K</a>
+                    
+                </td><td>Miami FL, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266350">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266350" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://springfieldstriders.org.uk/peace-results/hobble-2018-results/" target="_blank">Hylands Hobble</a>
+                    
+                </td><td>Galleywood</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260923">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260923" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.maraton.istanbul/kopyasi-results" target="_blank">Istanbul Marathon</a>
+                    
+                </td><td>Istanbul, TUR</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=256710">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=256710" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.bellahoustonroadrunners.co.uk/events/bella-10k/" target="_blank">Jimmy Irvine Bella 10K</a>
+                    
+                </td><td>Bellahouston Park</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260953">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260953" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.tds-live.com/ns/index.jsp?login=&password=&is_domenica=-1&nextRaceId=&dpbib=&dpcat=&dpsex=&serviziol=&pageType=1&id=9863&servizio=000&locale=1040" target="_blank">Livorno Half Marathon</a>
+                    
+                </td><td>Livorno, ITA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266327">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266327" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.maratondetenerife.com/resultados.html" target="_blank">Maratón Internacional de Santa Cruz de Tenerife</a>
+                    
+                </td><td>Santa Cruz de Tenerife, ESP</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265350">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265350" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://m.raceresults360.com/#/race/nbQSZx/M/results/ALL" target="_blank">Pensacola Marathon</a>
+                    
+                </td><td>Pensacola FL, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265379">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265379" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/260954_7901_11112018230358_peterheadrunbritianrankings2.xls" target="_blank">Peterhead 10K</a>
+                    
+                </td><td>Peterhead</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260954">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260954" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://my6.raceresult.com/112161/results?lang=en#1_7AAEAD" target="_blank">Phoenix Remembrance Day Marathon</a>
+                    
+                </td><td>Walton-on-Thames</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260921">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260921" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.nice-work.org.uk/races/the-regents-park-10k-/2018" target="_blank">Regents Park 10K</a>
+                    
+                </td><td>London Regents Park</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261017">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261017" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.hareandtortoiserunning.co.uk/copy-of-sporting-legends" target="_blank">Rememberance Day 100th Anniversary 6-Hour</a>
+                    
+                </td><td>Brightlingsea</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260922">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260922" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://runnation.co.uk/results" target="_blank">Run Durham 10</a>
+                    
+                </td><td>Hamsterley</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=266383">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266383" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://runnation.co.uk/results" target="_blank">Run Durham 5</a>
+                    
+                </td><td>Hamsterley</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=261021">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261021" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://results.racetimers.co.uk/results.aspx?CId=16487&RId=4293" target="_blank">RunThrough Chase the Sun Crystal Palace 10K</a>
+                    
+                </td><td>Crystal Palace</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=266349">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266349" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://results.racetimers.co.uk/results.aspx?CId=16487&RId=4293" target="_blank">RunThrough Chase the Sun Crystal Palace 5K</a>
+                    
+                </td><td>Crystal Palace</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=253226">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=253226" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.mountsbayharriers.co.uk/wp-content/uploads/2018/11/Remembrance-Run-2018-timing-chip-results-1.pdf" target="_blank">St Michael's Mount Remembrance Run 4.2</a>
+                    
+                </td><td>Marazion</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=261024">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261024" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.chiptiminguk.co.uk/stebbing-remembrance-day-102" target="_blank">Stebbing 10</a>
+                    
+                </td><td>Stebbing</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261019">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261019" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.stowmarketstriders.org.uk/sites/default/files/rptOpenstow7_0.pdf" target="_blank">Stowmarket Striders Scenic 7</a>
+                    
+                </td><td>Stowmarket</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=226015">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=226015" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://cdn.buildresources.co.uk/sites/1031/docs/all_results_four_by_four.pdf" target="_blank">Swinsty & Fewston Marathon Day 4</a>
+                    
+                </td><td>Timble</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265329">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265329" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.runrocknroll.com/events/las-vegas/the-races/half-marathon/2018-results" target="_blank">Toyota Rock 'N' Roll Las Vegas Half Marathon</a>
+                    
+                </td><td>Las Vegas NV, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265380">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265380" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.runrocknroll.com/en/events/las-vegas/the-races/marathon/2018-results" target="_blank">Toyota Rock 'N' Roll Las Vegas Marathon</a>
+                    
+                </td><td>Las Vegas NV, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265378">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265378" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.fyldecoastrunners.com/uploads/5/2/4/9/52490083/overallresults_classic6_w10k.pdf" target="_blank">Windmill 10K</a>
+                    
+                </td><td>Lytham St Annes</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261026">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261026" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="https://www.trailoutlaws.com/wooler-results-2018.php" target="_blank">Wooler Trail Marathon</a>
+                    
+                </td><td>Wooler</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260918">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260918" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 11 Nov 2018</td><td>
+                    <a href="http://www.yvaa.org/app/download/31085048/18GP9-Spen.pdf" target="_blank">YVAA GP Series</a>
+                    
+                </td><td>Spenborough</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265203">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265203" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://nirunning.co.uk/wp-content/uploads/2018/11/Ballynahinch-5k-Road-Race-2018-Results.xlsx" target="_blank">Ballynahinch Run to Remember 5K</a>
+                    
+                </td><td>Ballynahinch</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260986">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260986" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.trailbetws.com/results/" target="_blank">Betws-y-Coed Trail 10K</a>
+                    
+                </td><td>Betws-y-Coed</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265374">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265374" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.trailbetws.com/results/" target="_blank">Betws-y-Coed Trail 5K</a>
+                    
+                </td><td>Betws-y-Coed</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265205">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265205" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/248769_46253_11112018092402_5KResultsNov2018EA.doc.doc" target="_blank">Buxton Pavilion Gardens 5K</a>
+                    
+                </td><td>Buxton</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=248769">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=248769" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="http://results.racetimers.co.uk/Results.aspx?CId=16487&RId=4292" target="_blank">Cheshire 10K</a>
+                    
+                </td><td>Antrobus</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=247889">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=247889" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.fullonsport.com/event/dark-valley-10k-2018/results" target="_blank">Dark Valley 10K</a>
+                    
+                </td><td>Ringwood</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265206">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265206" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.fullonsport.com/event/dark-valley-half-marathon-2018/results" target="_blank">Dark Valley Half Marathon</a>
+                    
+                </td><td>Ringwood</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265313">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265313" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.stuweb.co.uk/race/1Vd" target="_blank">Glen Clova Half Marathon</a>
+                    
+                </td><td>Kirriemuir</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260952">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260952" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.greatowl.org/holly-hustle/" target="_blank">Holly Hustle</a>
+                    
+                </td><td>Leeds</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260916">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260916" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    Mad Jack's 5
+                    <a href="http://www.shrewsburyac.org.uk" target="_blank">Info</a>
+                </td><td>Atcham</td><td align="center">Multi</td><td align="center">&nbsp;</td><td><a href="/submit/submitmeeting.aspx?meetingid=261015" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://runsignup.com/Race/Results/12602/#resultSetId-137011" target="_blank">Old Naples 10K</a>
+                    
+                </td><td>Naples FL, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265356">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265356" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.phoenixrunning.co.uk/resultsDetail" target="_blank">Phoenix Dinosaur Dash 6-Hour</a>
+                    
+                </td><td>Walton-on-Thames</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260920">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260920" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="http://uksportstiming.co.uk/Results/poppyhalf_results_18/10k_results.pdf" target="_blank">Poppy 10K</a>
+                    
+                </td><td>Bexhill-on-Sea</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265327">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265327" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="http://uksportstiming.co.uk/Results/poppyhalf_results_18/5k_results.pdf" target="_blank">Poppy 5K</a>
+                    
+                </td><td>Bexhill-on-Sea</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265326">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265326" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="http://uksportstiming.co.uk/" target="_blank">Poppy Half Marathon</a>
+                    
+                </td><td>Bexhill-on-Sea</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=261014">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=261014" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.racerunway.com/peak/wp-content/uploads/2018/11/2018_RTP_RESULT_7KM.pdf" target="_blank">Race The Peak 7K</a>
+                    
+                </td><td>Hong Kong, CHN</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266325">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266325" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://runsignup.com/Race/Results/65297/#resultSetId-129186" target="_blank">Sebastian Strong 5K</a>
+                    
+                </td><td>Miami Springs FL, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266301">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266301" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://nirunning.co.uk/wp-content/uploads/2018/11/Sperrin-Harriers-Winter-League-2018-Race-1-Davagh-Forest-10k-Results.xlsx" target="_blank">Sperrin Harriers Winter League Davagh Forest 10K</a>
+                    
+                </td><td>Davagh Trail Head</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265207">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265207" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://cdn.buildresources.co.uk/sites/1031/docs/4th_results_three_days_of_four_by_four.pdf" target="_blank">Swinsty & Fewston Marathon Day 3</a>
+                    
+                </td><td>Timble</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265273">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265273" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://my3.raceresult.com/103908/results?lang=en#0_1856F7" target="_blank">Vale Half Marathon</a>
+                    
+                </td><td>Llantwit Major</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260939">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260939" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://toughrunneruk.com/results/" target="_blank">Wales Winter 10</a>
+                    
+                </td><td>Pontrhydyfen</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=249445">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=249445" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="http://live.sportident.co.uk/home/multistage/stage/results.html?multistageid=37159217-d71c-4a60-afc9-53c87006795d" target="_blank">Warrington Way 40</a>
+                    
+                </td><td>Lymm</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260919">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260919" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 10 Nov 2018</td><td>
+                    <a href="https://www.trailoutlaws.com/wooler-hm-results-2018.php" target="_blank">Wooler Trail Half Marathon</a>
+                    
+                </td><td>Wooler</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260917">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260917" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 9 Nov 2018</td><td>
+                    Algarve Challenge Pine Forest Trail Race
+                    
+                </td><td>Monte Gordo, POR</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265375">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265375" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 9 Nov 2018</td><td>
+                    <a href="http://raceme.ae/results/dfc-results/" target="_blank">Dubai Festival City 10K</a>
+                    
+                </td><td>Dubai, UAE</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265352">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265352" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 9 Nov 2018</td><td>
+                    <a href="http://z-adventures.org/uploads/3/4/9/4/34941362/qrs_fall_edition_2018_-_race_3_-_result_link.pdf" target="_blank">QRS Fall Edition</a>
+                    
+                </td><td>MIA Park, QAT</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265353">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265353" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 9 Nov 2018</td><td>
+                    <a href="https://cdn.buildresources.co.uk/sites/1031/docs/4th_results_three_days_of_four_by_four.pdf" target="_blank">Swinsty & Fewston Marathon Day 2</a>
+                    
+                </td><td>Timble</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265272">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265272" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Thu 8 Nov 2018</td><td>
+                    <a href="https://www.nice-work.org.uk/races/nottingham-winter-1/2018" target="_blank">Nottingham 5K Winter Series</a>
+                    
+                </td><td>Nottingham</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260872">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260872" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Thu 8 Nov 2018</td><td>
+                    Starlight Relay (4 x 2M)
+                    <a href="https://www.peakrunning.co.uk" target="_blank">Info</a>
+                </td><td>Allenton</td><td align="center">Multi</td><td align="center">&nbsp;</td><td><a href="/submit/submitmeeting.aspx?meetingid=260915" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Thu 8 Nov 2018</td><td>
+                    <a href="https://cdn.buildresources.co.uk/sites/1031/docs/4th_results_three_days_of_four_by_four.pdf" target="_blank">Swinsty & Fewston Marathon Day 1</a>
+                    
+                </td><td>Timble</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260914">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260914" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Thu 8 Nov 2018</td><td>
+                    <a href="https://racebest.com/results/atqyk" target="_blank">York 5K Race Series</a>
+                    
+                </td><td>York</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=235661">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=235661" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Wed 7 Nov 2018</td><td>
+                    <a href="https://www.nice-work.org.uk/races/leicester-winter-1/2018" target="_blank">Leicester City Winter 5K Series</a>
+                    
+                </td><td>Leicester</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260868">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260868" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Wed 7 Nov 2018</td><td>
+                    <a href="https://www.runinthedark.org/results-dublin-2018/" target="_blank">Run In the Dark</a>
+                    
+                </td><td>Dublin, IRL</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=266326">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=266326" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Wed 7 Nov 2018</td><td>
+                    <a href="http://runeatsleep.co.uk/the-monthly-mile-november-2018/" target="_blank">South Shields Monthly Mile</a>
+                    
+                </td><td>South Shields</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=237847">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=237847" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Tue 6 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/252984_46253_14112018090831_Chingford League 2018-19 Season R3 Full Result V2.xlsx" target="_blank">Chingford League 5K</a>
+                    
+                </td><td>Hog Hill</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=252984">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=252984" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Tue 6 Nov 2018</td><td>
+                    <a href="http://www.tynebridgeharriers.com/2018/11/07/2018-tyne-bridge-harriers-winter-grand-prix-5k-1-results/" target="_blank">Tyne Bridge Harriers Winter Grand Prix 5K</a>
+                    
+                </td><td>Newcastle</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264085">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264085" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.abergeleharriers.co.uk/S5.htm" target="_blank">Abergele 5 (inc North Wales Championships)</a>
+                    
+                </td><td>Abergele</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260861">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260861" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://results.sporthive.com/events/6460069711597044224/races/446684" target="_blank">Age UK Junior Dash 2K</a>
+                    
+                </td><td>Leeds</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265190">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265190" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://results.sporthive.com/events/6460069711597044224" target="_blank">Age UK Leeds Abbey Dash 10K</a>
+                    
+                </td><td>Leeds</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=247241">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=247241" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.sportstimingsolutions.co.uk/rd.php?id=286" target="_blank">Barton Deepdale Dash 10K</a>
+                    
+                </td><td>Barton upon Humber</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260862">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260862" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.nice-work.org.uk/races/beckley-10k/2018" target="_blank">Beckley 10K</a>
+                    
+                </td><td>Beckley</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260866">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260866" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.striders10k.billericaystriders.com/images/stories/Results/2018/overall%20results_min.pdf" target="_blank">Billericay Striders 10K</a>
+                    
+                </td><td>Billericay</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260847">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260847" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.facebook.com/broadlandhalf/posts/935913619932856?__xts__%5B0%5D=68.ARD3vV3IYukyVExbsCM0pv7PiP-z_46JOkbgqkI7KXrBWq8IJ6e8diJBzPeAv0e-CsI6Yf_3AjBjTKMOx376lKxpMQTHae4xFa4rgFCwMorCjBOfWi__pIMmnkSq4fFcKwLL4O7206VUFWniRqSjkn6HGjJBdU4HSKmPp6FLnJp1MIxP" target="_blank">Broadland Half Marathon</a>
+                    
+                </td><td>South Walsham</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260842">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260842" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.resultsbase.net/event/4584/results" target="_blank">Brodie Castle 10K</a>
+                    
+                </td><td>Forres</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260950">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260950" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    Canal Race 5
+                    <a href="http://www.kimberworthstriders.co.uk" target="_blank">Info</a>
+                </td><td>Rotherham</td><td align="center">Multi</td><td align="center">&nbsp;</td><td><a href="/submit/submitmeeting.aspx?meetingid=260851" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://centurionrc.org.uk/wp-content/uploads/2018/11/041118-5M.pdf" target="_blank">Centurion Grand Prix 5</a>
+                    
+                </td><td>Solihull</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260855">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260855" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/260846_46253_06112018103829_Nice10K,LetsMoveIt10K.xlsx" target="_blank">Conductive Education Lets Move It 10K</a>
+                    
+                </td><td>Birmingham</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260846">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260846" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.eastcornwallharriers.com/documents/Cornish%20Marathon%204th%20November%202018%20Results.xlsx" target="_blank">Cornish Marathon</a>
+                    
+                </td><td>Liskeard</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260849">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260849" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://resultadoscarreras.es/index.php?pag=res&idi=ES&car=68" target="_blank">Corre por el Nino</a>
+                    
+                </td><td>Madrid, ESP</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264242">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264242" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.nice-work.org.uk/races/the-deal-5-mile/2018" target="_blank">Deal Castle 5</a>
+                    
+                </td><td>Deal</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260848">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260848" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://athleticsni.org/download/files/Results2018-DecathlonBelfast10k.xls" target="_blank">Decathlon Belfast 10K</a>
+                    
+                </td><td>Belfast</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264090">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264090" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://derwentwater10.weebly.com/results.html" target="_blank">Derwentwater 10</a>
+                    
+                </td><td>Keswick</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260867">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260867" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://lochaberac.co.uk/wp-content/uploads/2018/11/EDDIES-HALF-MARATHON-2018-RESULTS-1.pdf" target="_blank">Eddie's Lochaber Half Marathon</a>
+                    
+                </td><td>Fort William</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260951">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260951" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.facebook.com/topdayevents/" target="_blank">Elmstead Market Trail Half Marathon / Marathon</a>
+                    
+                </td><td>Elmstead</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260911">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260911" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://my1.raceresult.com/111656/#0_65928F" target="_blank">Epsom Downs Autumn 5K / 10K</a>
+                    
+                </td><td>Epsom</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260850">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260850" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.sportstats.ca/display-results.xhtml?raceid=95497" target="_blank">Fall Classic Half Marathon</a>
+                    
+                </td><td>Vancouver, CAN</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265185">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265185" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/260852_46253_06112018085113_Flying Fox 10 Results 2018.pdf" target="_blank">Flying Fox 10</a>
+                    
+                </td><td>Standon</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260852">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260852" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.resultsbase.net/event/4453/results" target="_blank">Gibside Fruit Bowl 7</a>
+                    
+                </td><td>Burnopfield</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260841">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260841" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/260863_46253_04112018165439_RaceResults.pdf" target="_blank">Gillingham Hilly 7.5</a>
+                    
+                </td><td>Gillingham</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260863">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260863" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://my3.raceresult.com/111420/results?lang=en#0_408169" target="_blank">Gunpowder Plot 10K</a>
+                    
+                </td><td>York</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=264086">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264086" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.ukresults.net/2018/fawkes.html" target="_blank">Guy Fawkes 10</a>
+                    
+                </td><td>Ripley</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260854">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260854" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://my4.raceresult.com/111480/results?lang=en#0_65C2AF" target="_blank">Guy Fawkes 5</a>
+                    
+                </td><td>Tewkesbury</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260864">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260864" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.racetecresults.com/Results.aspx?CId=16418&RId=521" target="_blank">Hayling 10</a>
+                    
+                </td><td>Hayling Island</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260843">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260843" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.lancaster-race-series.co.uk/race-results-2018/" target="_blank">Lancaster Half Marathon</a>
+                    
+                </td><td>Lancaster</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260865">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260865" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.sportsplits.com/m3/event?c=34&r=10212&e=1" target="_blank">Lay Associates Half Marathon (inc Canterbury Championships)</a>
+                    
+                </td><td>Leeston, NZL</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265355">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265355" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://bases.athle.com/asp.net/liste.aspx?frmbase=resultats&frmmode=1&frmespace=0&frmcompetition=205408" target="_blank">Marathon des Alpes-Maritimes Nice-Cannes</a>
+                    
+                </td><td>Cannes, FRA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264413">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264413" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.icron.it/services/classifica/icron.php?page=1&numRows=50&gara=2018479" target="_blank">Marcia della Solidarietà</a>
+                    
+                </td><td>Torremaggiore, ITA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265188">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265188" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.racesonline.uk/" target="_blank">Marlow 7</a>
+                    
+                </td><td>Marlow</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265201">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265201" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.racesonline.uk/" target="_blank">Marlow Half Marathon</a>
+                    
+                </td><td>Marlow</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260844">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260844" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://secondwindrunning.co.uk/p/results" target="_blank">Meon Valley Marathon</a>
+                    
+                </td><td>Meonstoke</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260913">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260913" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.chaser.me.uk/tenk/results.php" target="_blank">Mornington Chasers Regent's Park 10K Winter Series</a>
+                    
+                </td><td>London Regents Park</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=256517">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=256517" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.itsgrimupnorthrunning.co.uk/results" target="_blank">Northern Jumble</a>
+                    
+                </td><td>Slaithwaite</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260912">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260912" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://my3.raceresult.com/111543/results?lang=en#0_3EF1B7" target="_blank">Nottingham Let's Go Round Again</a>
+                    
+                </td><td>Holme Pierrepont</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=238578">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=238578" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://oakhavenhalf.co.uk/" target="_blank">Oakhaven New Forest Half Marathon</a>
+                    
+                </td><td>Brockenhurst</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260853">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260853" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://trailrunningpeaks.co.uk/results/" target="_blank">Peak District Autumn Series</a>
+                    
+                </td><td>Buxton</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=244734">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=244734" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.maratonadoporto.com/en/results-2018/" target="_blank">Porto Marathon</a>
+                    
+                </td><td>Porto, POR</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=256708">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=256708" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.fullonsport.com/event/tata-steel-richard-burton-10k-2018/results" target="_blank">Richard Burton 10K</a>
+                    
+                </td><td>Cwmavon</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=256663">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=256663" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://results.eventchiptiming.com/results.aspx?CId=16202&RId=10045" target="_blank">Richmond Half Marathon</a>
+                    
+                </td><td>Richmond</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=247240">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=247240" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.facebook.com/swimbikerunevents/photos/a.10151430895795862/10156406776135862/?type=3&__xts__%5B0%5D=68.ARDM5ZJ6tVsTdRdqGPvZhW_wAyvExEDUucHsKOPGf0kK3uM9MKn53KTL28DaSccRaRq1B8n5IOj27b49s-mBCVSO3llRsgXRiEmcdni3jmWjfEy4OC_513uTenqRHKad88UkPBjfHZLzq" target="_blank">Rockingham 10</a>
+                    
+                </td><td>Corby</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265245">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265245" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.facebook.com/swimbikerunevents/photos/a.10151430895795862/10156406776135862/?type=3&__xts__%5B0%5D=68.ARDM5ZJ6tVsTdRdqGPvZhW_wAyvExEDUucHsKOPGf0kK3uM9MKn53KTL28DaSccRaRq1B8n5IOj27b49s-mBCVSO3llRsgXRiEmcdni3jmWjfEy4OC_513uTenqRHKad88UkPBjfHZLzq" target="_blank">Rockingham 10K</a>
+                    
+                </td><td>Corby</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265244">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265244" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.facebook.com/swimbikerunevents/photos/a.10151430895795862/10156406776135862/?type=3&__xts__%5B0%5D=68.ARDM5ZJ6tVsTdRdqGPvZhW_wAyvExEDUucHsKOPGf0kK3uM9MKn53KTL28DaSccRaRq1B8n5IOj27b49s-mBCVSO3llRsgXRiEmcdni3jmWjfEy4OC_513uTenqRHKad88UkPBjfHZLzq" target="_blank">Rockingham 5K</a>
+                    
+                </td><td>Corby</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=242511">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=242511" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://racetecresults.com/results.aspx?CId=16586&RId=325" target="_blank">Royal Parks Winter 10K Series</a>
+                    
+                </td><td>London Greenwich Park</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=223544">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=223544" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://results.racetimers.co.uk/results.aspx?CId=16487&RId=4291" target="_blank">Run Tatton Half Marathon</a>
+                    
+                </td><td>Knutsford</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=230040">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=230040" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.saturnrunning.co.uk/the-runger-games" target="_blank">Saturn Running Runger Games Challenge 6-Hour</a>
+                    
+                </td><td>Earley</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260927">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260927" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.endu.net/it/events/lago-maggiore-marathon-2/results" target="_blank">SPORTWAY Lago Maggiore Marathon</a>
+                    
+                </td><td>Verbania, ITA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264813">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264813" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://www.stuweb.co.uk/race/1O7" target="_blank">Strathaven Striders Run with the Wind 10K</a>
+                    
+                </td><td>Strathaven</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264087">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264087" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://sthelensstriders.com/wp-content/uploads/2018/11/RaceResults.pdf" target="_blank">Striders 5</a>
+                    
+                </td><td>St. Helens</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260845">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260845" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://results.nyrr.org/event/M2018/finishers" target="_blank">TCS New York City Marathon</a>
+                    
+                </td><td>New York NY, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=256709">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=256709" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="http://www.annananddistrictathleticclub.co.uk/index.asp?pageid=691879" target="_blank">Tour de Moffat 5.7</a>
+                    
+                </td><td>Moffat</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=264088">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264088" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sun 4 Nov 2018</td><td>
+                    <a href="https://drive.google.com/file/d/1hIXz_cgHp-bqtf3x0SzfKN8ED67BArNN/view" target="_blank">Twmbarlwm Terror 7</a>
+                    
+                </td><td>Risca</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=264084">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264084" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://results.nyrr.org/event/18DTF5K/finishers" target="_blank">Abbott Dash to the Finish Line 5K</a>
+                    
+                </td><td>New York NY, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=264212">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264212" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    Abney Cheadle Run 5K
+                    <a href="http://www.abneycheadlerun.co.uk" target="_blank">Info</a>
+                </td><td>Cheadle</td><td align="center">Multi</td><td align="center">&nbsp;</td><td><a href="/submit/submitmeeting.aspx?meetingid=226537" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    Batman's Trail 8
+                    <a href="http://www.formula4fitness.co.uk" target="_blank">Info</a>
+                </td><td>East Leake</td><td align="center">Multi</td><td align="center">&nbsp;</td><td><a href="/submit/submitmeeting.aspx?meetingid=260908" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://imm.onlineraceresults.com/search.php" target="_blank">CNO Financial Indianapolis Monumental Half Marathon</a>
+                    
+                </td><td>Indianapolis IN, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265186">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265186" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://imm.onlineraceresults.com/search.php" target="_blank">CNO Financial Indianapolis Monumental Marathon</a>
+                    
+                </td><td>Indianapolis IN, USA</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=265198">Complete</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265198" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://runyabam.com/glen-ogle-33-2018-race-results/" target="_blank">Glen Ogle 33</a>
+                    
+                </td><td>Killin</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260949">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260949" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://www.wildnightrun.co.uk/the-races/the-haldon-night-10km-old/results-haldon-night/" target="_blank">Haldon Night 10K</a>
+                    
+                </td><td>Kennford</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260909">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260909" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://www.macclesfield-harriers.co.uk/images/notlangleynot72018results.pdf" target="_blank">Langley 7</a>
+                    
+                </td><td>Langley</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260839">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260839" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://racetecresults.com/results.aspx?CId=16586&RId=324" target="_blank">QEOP Winter 10K Series</a>
+                    
+                </td><td>London Olympic Park</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=223536">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=223536" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://www.osbevents.com/events/running/robin-hood-trail-runs/" target="_blank">Robin Hood 10K</a>
+                    
+                </td><td>Mansfield</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260840">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260840" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://www.belfasttelegraph.co.uk/sport/running/belfast-telegraph-born2run-series-2018-run-forest-run-minnowburn-5k-and-10k-full-results-and-pictures-37488667.html?fbclid=IwAR03uQbO7LzDIzDdgzCTv-CeMvc1Bc4eiowUQRg9UhiIE_crqqijWLO8230" target="_blank">Run Forest Run – Minnowburn 10K</a>
+                    
+                </td><td>Belfast</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=265202">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=265202" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://www.belfasttelegraph.co.uk/sport/running/belfast-telegraph-born2run-series-2018-run-forest-run-minnowburn-5k-and-10k-full-results-and-pictures-37488667.html?fbclid=IwAR03uQbO7LzDIzDdgzCTv-CeMvc1Bc4eiowUQRg9UhiIE_crqqijWLO8230" target="_blank">Run Forest Run – Minnowburn 5K</a>
+                    
+                </td><td>Belfast</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260983">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260983" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://results.racetimers.co.uk/results.aspx?CId=16487&RId=4290" target="_blank">Run Tatton 10K</a>
+                    
+                </td><td>Knutsford</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260838">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260838" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="http://knowsley-harriers.com/results" target="_blank">SunFlowers Halewood 5K Series</a>
+                    
+                </td><td>Liverpool</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=226056">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=226056" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://www.hermesrunning.com/" target="_blank">Thames Meander Half Marathon</a>
+                    
+                </td><td>Kingston upon Thames</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=226611">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=226611" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Sat 3 Nov 2018</td><td>
+                    <a href="https://www.hermesrunning.com/" target="_blank">Thames Meander Marathon</a>
+                    
+                </td><td>Kingston upon Thames</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=264279">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=264279" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 2 Nov 2018</td><td>
+                    <a href="https://www.riderhq.com/events/82985/ealing-mile---november-2018/141974/all" target="_blank">Ealing Mile</a>
+                    
+                </td><td>Ealing</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=226525">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=226525" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 2 Nov 2018</td><td>
+                    <a href="https://www.webscorer.com/racedetails?raceid=159441" target="_blank">Friday Fright Night 5</a>
+                    
+                </td><td>Braintree</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260906">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260906" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:#ECF2F7;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 2 Nov 2018</td><td>
+                    <a href="http://www.thepowerof10.info/resultsfiles/2018/260944_46253_04112018142359_Proms 2 November 2018.xls" target="_blank">Run-4-It Metro Proms 3K Winter Series</a>
+                    
+                </td><td>Aberdeen</td><td align="center">Road</td><td align="center"><a href="/results/results.aspx?meetingid=260944">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260944" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr><tr style="background-color:White;font-size:10pt;">
+				<td style="white-space:nowrap;">Fri 2 Nov 2018</td><td>
+                    <a href="http://www.formula4fitness.co.uk/app/download/22952163/Night+Trail+Results.xlsx" target="_blank">The Night Trail 5</a>
+                    
+                </td><td>East Leake</td><td align="center">Multi</td><td align="center"><a href="/results/results.aspx?meetingid=260907">Full</a></td><td><a href="/submit/submitmeeting.aspx?meetingid=260907" title="submit results"><img src="/images/pot/email.gif" border="0" /></a></td>
+			</tr>
+		</table>
+    <table>
+        <tr>
+            <td>
+                <a href="/submit/submitmeeting.aspx">Submit Results for another Meeting</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+        </tr>
+    </table>
+
+            
+<!-- end div for id="content" from banner-->
+				</div>
+			</div><!-- End mb2-m -->
+			
+		<div class="mb2-b" style="clear:both"></div>
+		
+</div><!-- End main-->
+
+<div id="footer">
+<div class="main-block3">
+
+<div class="mb3-t"></div>
+
+<div class="mb3-m">
+	<div class="inside">
+		<div class="sponsors-block">
+
+			<div class="title">Official sponsors:</div>
+																				
+			<div class="box"></div>
+			<div class="box"></div>
+
+		</div><!-- End sponsors-block-->
+		
+			<div class="bottom">
+				<address><strong class="title">UK Athletics Ltd.</strong> <span>Alexander Stadium Walsall Road Perry Barr Birmingham B42 2BE</span></address>
+				<dl class="contacts">
+					<dt>Tel:</dt>
+					<dd>0121 713 8400</dd>
+					<dt>Fax:</dt>
+					<dd>0121 713 8452</dd>
+				</dl>
+				<ul class="bottom-nav">
+					<li style="padding: 0 19px 0 0;">Powered by <a href="http://www.athleticsdata.com/"><img alt="Athletics Data" title="Athletics Data" src="/images/rb/athleticsdata.png" style="vertical-align:bottom"></a></li>
+					<li><a href="mailto:admin@runbritainrankings.com">Contact us</a></li>
+				</ul>
+			</div><!-- End bottom-->
+		</div><!-- End inside-->
+	</div><!-- End mb3-m-->
+
+	<div class="mb3-b"></div>
+	
+</div><!-- End main-block3-->
+</div><!-- End footer-->
+
+            <!--</td>
+	</tr>
+</table>
+-->
+        </div>
+    </div>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("banner_vsLogin"));
+var Page_Validators =  new Array(document.getElementById("banner_rfvEmail"), document.getElementById("banner_rfvPassword"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var banner_rfvEmail = document.all ? document.all["banner_rfvEmail"] : document.getElementById("banner_rfvEmail");
+banner_rfvEmail.controltovalidate = "banner_txtEmail";
+banner_rfvEmail.errormessage = "Please enter your email address";
+banner_rfvEmail.display = "None";
+banner_rfvEmail.validationGroup = "Login";
+banner_rfvEmail.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+banner_rfvEmail.initialvalue = "";
+var banner_rfvPassword = document.all ? document.all["banner_rfvPassword"] : document.getElementById("banner_rfvPassword");
+banner_rfvPassword.controltovalidate = "banner_txtPassword";
+banner_rfvPassword.errormessage = "Please enter your password";
+banner_rfvPassword.display = "None";
+banner_rfvPassword.validationGroup = "Login";
+banner_rfvPassword.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+banner_rfvPassword.initialvalue = "";
+var banner_vsLogin = document.all ? document.all["banner_vsLogin"] : document.getElementById("banner_vsLogin");
+banner_vsLogin.showmessagebox = "True";
+banner_vsLogin.showsummary = "False";
+banner_vsLogin.displaymode = "List";
+banner_vsLogin.validationGroup = "Login";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+
+    <script language="javascript" type="text/javascript" src="/js/jquery.qtip-1.0.0-rc3.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.register-help a[title]').qtip({ position: { corner: { target: 'topRight', tooltip: 'bottomLeft'} }, style: { width: 200, background: '#e1adba', color: '#172E39', name: 'red'} })
+            $('.inline-help a[title]').qtip({ position: { corner: { target: 'topRight', tooltip: 'bottomLeft'} }, style: { width: 200, background: '#e1adba', color: '#172E39', name: 'red'} })
+            $('#social-media-menu a[title]').qtip({ position: { corner: { target: 'topRight', tooltip: 'bottomLeft'} }, style: { name: 'blue'} })
+            $('#achievements a img[title]').qtip({ position: { corner: { target: 'rightBottom', tooltip: 'topLeft'} }, style: { name: 'blue'} })
+        });
+    </script>
+
+    <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8207901-7");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>
