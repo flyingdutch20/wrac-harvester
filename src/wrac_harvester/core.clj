@@ -2,6 +2,8 @@
   (:use [hickory.core])
   (:require [hickory.select :as s]
             [clj-http.client :as client]
+            [clj-time.core :as dt]
+            [clj-time.format :as fdt]
             [clojure.string :as string])
   (:gen-class))
 
@@ -26,6 +28,26 @@
 
 ;(retrieve-rb-urls rb-index)
 
+(defn extract-date-from
+  [date-string]
+  (let [elms (reverse (string/split date-string #"\s"))]
+    (fdt/parse (fdt/formatter "yyyyMMMdd") (str (nth elms 0) (nth elms 1) (nth elms 2)))))
+
+
+;(extract-date-from "Mon 13 Tue 1 Nov 2018")
+
+
+(defn retrieve-rb-urls-for-date
+  [rb-index date]
+  (def comp-date (dt/plus date (dt/days -1)))
+  (filter #(and
+             (% :url)
+             (dt/after? (extract-date-from (% :date)) comp-date))
+          (retrieve-rb-urls rb-index)))
+
+;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
+
+
 
 (defn retrieve-rb-race
   [url]
@@ -37,9 +59,36 @@
     (hash-map :name (-> (first header) :content first)
               :date (nth header 6))))
 
-;(retrieve-rb-race-header (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+;(retrieve-rb-race-header (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
+
+
+(defn retrieve-rb-race-pages
+  "#WIP extract page urls from header"
+  [rb-race]
+  (let [pages (s/select (s/id :cphBody_lblTopPageLinks) rb-race)]
+    (hash-map :url (-> (first header) :content first)
+              :date (nth header 6))))
+
+(s/select (s/id :cphBody_lblTopPageLinks) (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
+(comment
+  [{:type :element, :attrs {:id "cphBody_lblTopPageLinks"}, :tag :span, :content
+    ["Page: 1 "
+     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=2"}, :tag :a, :content ["2"]}
+     " "
+     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=3"}, :tag :a, :content ["3"]}
+     " "
+     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=4"}, :tag :a, :content ["4"]}
+     " "
+     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=5"}, :tag :a, :content ["5"]}
+     " "
+     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=6"}, :tag :a, :content ["6"]}
+     " "]}])
+
+
+
 
 (defn retrieve-rb-race-runners
+  "#WIP"
   [rb-race]
   (let [lines
         (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))]
@@ -53,7 +102,7 @@
                  )
       lines))))
 
-(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 
 (comment
   {:type :element, :attrs {:bgcolor "White"}, :tag :tr, :content
