@@ -63,27 +63,15 @@
 
 
 (defn retrieve-rb-race-pages
-  "#WIP extract page urls from header"
   [rb-race]
-  (let [pages (s/select (s/id :cphBody_lblTopPageLinks) rb-race)]
-    (hash-map :url (-> (first header) :content first)
-              :date (nth header 6))))
+  (let [pages (-> (s/select (s/id :cphBody_lblTopPageLinks) rb-race) first :content)]
+    (filter #(% :page)
+      (vec
+        (map
+          #(hash-map :page (-> % :attrs :href))
+          pages)))))
 
-(s/select (s/id :cphBody_lblTopPageLinks) (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
-(comment
-  [{:type :element, :attrs {:id "cphBody_lblTopPageLinks"}, :tag :span, :content
-    ["Page: 1 "
-     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=2"}, :tag :a, :content ["2"]}
-     " "
-     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=3"}, :tag :a, :content ["3"]}
-     " "
-     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=4"}, :tag :a, :content ["4"]}
-     " "
-     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=5"}, :tag :a, :content ["5"]}
-     " "
-     {:type :element, :attrs {:href "/results/results.aspx?meetingid=247241&pagenum=6"}, :tag :a, :content ["6"]}
-     " "]}])
-
+;(retrieve-rb-race-pages (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
 
 
 
