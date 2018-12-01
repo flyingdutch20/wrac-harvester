@@ -84,15 +84,19 @@
 
 ;(retrieve-rb-race-pages (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
 
+(defn filter-race-lines
+  [race-lines]
+    (filter #(and
+                      (:content (second (:content %)))
+                      (> (count (:content (second (:content %)))) 2))
+            race-lines))
 
 
 (defn retrieve-rb-race-runners
   [rb-race]
   (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
-        chip (if (has-chip? (nth lines 2)) 1 0)]
-    (filter #(and
-               (not= (count (:content %)) 3)
-               (:content (second (:content %))))
+        chip (if (has-chip? (nth lines 2)) 1 0)
+        filtered (filter-race-lines lines)]
       (vec
        (map
         #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
@@ -102,99 +106,8 @@
                    :cat   (-> (nth (-> % :content) (+ 9 chip)) :content first)
                    :sex   (-> (nth (-> % :content) (+ 10 chip)) :content first)
                    :club  (-> (nth (-> % :content) (+ 11 chip)) :content first))
-         (drop 3 lines))))))
+         filtered))))
 
-(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
-(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481"))
-
-;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))
-;229420 this one doesn't work because it has a second table on the same page
-;<tr style="background-color:Transparent;"><td colspan="49"><a name="r2"></a><b>5K B</b></td></tr>
-(:content (second (:content (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))
-                                                                        )) 91))))
-
-
-
-
-(defn retrieve-rb-race-runners-chip
-  "#WIP"
-  [rb-race]
-  (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
-        chip (if (has-chip? (nth lines 2)) 1 0)]
-    (filter #(and
-               (not= (count (:content %)) 3)
-               (:content (second (:content %))))
-      (vec
-       (map
-        #(hash-map :pos   (-> % :content))
-      (drop 3 lines))))))
-
-(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481"))
-(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))
-
-
-(nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
-                                                 ))) 1)
-
-(nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")
-                                                 ))) 3)
-
-
-(comment
-  {:type :element, :attrs {:bgcolor "White"}, :tag :tr, :content
-	["\r\n\t\t\t\t\t\t"
-	{:type :element, :attrs nil, :tag :td, :content [
-		"\r\n                        "
-		{:type :element, :attrs {:id "cphBody_gvP_chkUseInHeadToHead_3", :type "checkbox", :name "ctl00$cphBody$gvP$ctl05$chkUseInHeadToHead"}, :tag :input, :content nil}
-		"\r\n                    "]}
-	{:type :element, :attrs nil, :tag :td, :content ["1"]}
-	{:type :element, :attrs nil, :tag :td, :content ["34:51"]}
-	{:type :element, :attrs {:align "right", :nowrap "nowrap"}, :tag :td, :content [
-		{:type :element, :attrs {:color "Black"}, :tag :font, :content [" "]}]}
-	{:type :element, :attrs {:align "right", :nowrap "nowrap"}, :tag :td, :content [
-		{:type :element, :attrs {:color "Black"}, :tag :font, :content [" "]}]}
-	{:type :element, :attrs {:align "right", :nowrap "nowrap"}, :tag :td, :content [
-		{:type :element, :attrs {:color "Black"}, :tag :font, :content [{:type :element, :attrs nil, :tag :b, :content [" "]}]}]}
-	{:type :element, :attrs nil, :tag :td, :content [{:type :element, :attrs {:href "/runners/profile.aspx?athleteid=112443", :target "_blank"}, :tag :a, :content ["Gareth Green"]} " "]}
-	{:type :element, :attrs nil, :tag :td, :content [{:type :element, :attrs {:color "#7D1414"}, :tag :font, :content [{:type :element, :attrs nil, :tag :b, :content [" "]}]}]}
-	{:type :element, :attrs nil, :tag :td, :content ["V40"]}
-	{:type :element, :attrs nil, :tag :td, :content ["M"]}
-	{:type :element, :attrs nil, :tag :td, :content ["Knavesmire"]}
-	{:type :element, :attrs nil, :tag :td, :content ["34:33"]}
-	{:type :element, :attrs nil, :tag :td, :content ["34:33"]}
-	{:type :element, :attrs {:align "center", :nowrap "nowrap"}, :tag :td, :content ["-1.2"]}
-	{:type :element, :attrs nil, :tag :td, :content [" "]}
-	{:type :element, :attrs nil, :tag :td, :content [
-		{:type :element, :attrs {:href "/submit/identifyperformance.aspx?performanceid=48190803", :title "notify us of amends", :target "_blank"}, :tag :a, :content [
-			{:type :element, :attrs {:src "/images/pot/email.gif", :border "0"}, :tag :img, :content nil}]}]}
-	"\r\n\t\t\t\t\t"]})
-
-(comment
-{:type :element, :attrs {:bgcolor "#ECF2F7"}, :tag :tr, :content
-	["\r\n\t\t\t\t\t\t"
-	{:type :element, :attrs nil, :tag :td, :content [
-		"\r\n                        "
-		{:type :element, :attrs {:id "cphBody_gvP_chkUseInHeadToHead_4", :type "checkbox", :name "ctl00$cphBody$gvP$ctl06$chkUseInHeadToHead"}, :tag :input, :content nil}
-		"\r\n                    "]}
-	{:type :element, :attrs nil, :tag :td, :content ["2"]}
-	{:type :element, :attrs nil, :tag :td, :content ["34:54"]}
-	{:type :element, :attrs {:align "right", :nowrap "nowrap"}, :tag :td, :content [{:type :element, :attrs {:color "Black"}, :tag :font, :content [" "]}]}
-	{:type :element, :attrs {:align "right", :nowrap "nowrap"}, :tag :td, :content [{:type :element, :attrs {:color "Black"}, :tag :font, :content [" "]}]}
-	{:type :element, :attrs {:align "right", :nowrap "nowrap"}, :tag :td, :content [{:type :element, :attrs {:color "Black"}, :tag :font, :content [{:type :element, :attrs nil, :tag :b, :content [" "]}]}]}
-	{:type :element, :attrs nil, :tag :td, :content [{:type :element, :attrs {:href "/runners/profile.aspx?athleteid=400783", :target "_blank"}, :tag :a, :content ["Nathan Veall"]} " "]}
-	{:type :element, :attrs nil, :tag :td, :content [{:type :element, :attrs {:color "#7D1414"}, :tag :font, :content [{:type :element, :attrs nil, :tag :b, :content ["SB"]}]}]}
-	{:type :element, :attrs nil, :tag :td, :content ["U23"]}
-	{:type :element, :attrs nil, :tag :td, :content ["M"]}
-	{:type :element, :attrs nil, :tag :td, :content ["York Triathlon"]}
-	{:type :element, :attrs nil, :tag :td, :content ["34:54"]}
-	{:type :element, :attrs nil, :tag :td, :content ["33:50"]}
-	{:type :element, :attrs {:align "center", :nowrap "nowrap"}, :tag :td, :content ["1.4"]}
-	{:type :element, :attrs nil, :tag :td, :content [" "]}
-	{:type :element, :attrs nil, :tag :td, :content [
-		{:type :element, :attrs {:href "/submit/identifyperformance.aspx?performanceid=48190804", :title "notify us of amends", :target "_blank"}, :tag :a, :content [
-			{:type :element, :attrs {:src "/images/pot/email.gif", :border "0"}, :tag :img, :content nil}]}]}
-	"\r\n\t\t\t\t\t"]}
-
-  )
+;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ; just gun time
+;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481")) ; gun time and chip time
+;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")) ; multiple races on one page
