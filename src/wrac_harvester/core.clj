@@ -82,7 +82,7 @@
           #(hash-map :page (-> % :attrs :href))
           pages)))))
 
-;(retrieve-rb-race-pages (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
+(retrieve-rb-race-pages (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
 
 (defn filter-race-lines
   [race-lines]
@@ -111,3 +111,15 @@
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ; just gun time
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481")) ; gun time and chip time
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")) ; multiple races on one page
+
+
+(defn retrieve-all-rb-race-runners
+  [rb-race]
+  (let [firstpage (retrieve-rb-race-runners rb-race)
+        pages (retrieve-rb-race-pages rb-race)]
+
+    (into firstpage
+          (retrieve-rb-race-runners
+            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page (first pages))))))))
+
+(count (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
