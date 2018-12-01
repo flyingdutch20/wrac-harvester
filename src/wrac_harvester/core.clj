@@ -75,22 +75,49 @@
 
 
 
-(defn retrieve-rb-race-runners
+(defn retrieve-rb-race-runners-gun
+  "#WIP works for gun"
+  [rb-race]
+  (let [lines
+        (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))]
+    (vec
+     (map
+      #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
+                 :gun   (-> (nth (-> % :content) 3) :content first)
+                 :chip  (nth (-> % :content) 4)
+                 :name  (-> (nth (-> % :content) 7) :content first :content first)
+                 :cat   (-> (nth (-> % :content) 9) :content first)
+                 :sex   (-> (nth (-> % :content) 10) :content first)
+                 :club  (-> (nth (-> % :content) 11) :content first)
+                 )
+      (drop 3 lines)))))
+
+(retrieve-rb-race-runners-gun (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")
+                                       )
+(defn retrieve-rb-race-runners-chip
   "#WIP"
   [rb-race]
   (let [lines
         (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))]
     (vec
      (map
-      #(hash-map :pos (-> % :content second :content first :content first)
-                 :gun  (-> (nth (-> % :content) 5) :content first :content first :attrs :href)
-                 :chip  (-> (nth (-> % :content) 5) :content first :content first :attrs :href)
-                 :name  (-> (nth (-> % :content) 5) :content first :content first :attrs :href)
-                 :club  (-> (nth (-> % :content) 5) :content first :content first :attrs :href)
+      #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
+                 :gun   (-> (nth (-> % :content) 3) :content first)
+                 :chip  (nth (-> % :content) 4)
+                 :name  (-> (nth (-> % :content) 7) :content first :content first)
+                 :cat   (-> (nth (-> % :content) 9) :content first)
+                 :sex   (-> (nth (-> % :content) 10) :content first)
+                 :club  (-> (nth (-> % :content) 11) :content first)
                  )
-      lines))))
+      (drop 3 lines)))))
 
-;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
+                                       )
+
+(nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
+                                                 ))) 2)
+
 
 (comment
   {:type :element, :attrs {:bgcolor "White"}, :tag :tr, :content
@@ -119,7 +146,9 @@
 	{:type :element, :attrs nil, :tag :td, :content [
 		{:type :element, :attrs {:href "/submit/identifyperformance.aspx?performanceid=48190803", :title "notify us of amends", :target "_blank"}, :tag :a, :content [
 			{:type :element, :attrs {:src "/images/pot/email.gif", :border "0"}, :tag :img, :content nil}]}]}
-	"\r\n\t\t\t\t\t"]}
+	"\r\n\t\t\t\t\t"]})
+
+(comment
 {:type :element, :attrs {:bgcolor "#ECF2F7"}, :tag :tr, :content
 	["\r\n\t\t\t\t\t\t"
 	{:type :element, :attrs nil, :tag :td, :content [
