@@ -61,6 +61,17 @@
 
 ;(retrieve-rb-race-header (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
 
+(defn has-chip?
+  [rb-race-header-line]
+  (= (-> (nth (-> rb-race-header-line :content) 4) :content first :content first) "Chip"))
+
+;(has-chip? (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+;                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))))))
+
+;(has-chip? (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+;                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))))))
+
+
 
 (defn retrieve-rb-race-pages
   [rb-race]
@@ -75,48 +86,60 @@
 
 
 
-(defn retrieve-rb-race-runners-gun
-  "#WIP works for gun"
+(defn retrieve-rb-race-runners
   [rb-race]
-  (let [lines
-        (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))]
-    (vec
-     (map
-      #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
-                 :gun   (-> (nth (-> % :content) 3) :content first)
-   ;              :chip  (nth (-> % :content) 4)
-                 :name  (-> (nth (-> % :content) 7) :content first :content first)
-                 :cat   (-> (nth (-> % :content) 9) :content first)
-                 :sex   (-> (nth (-> % :content) 10) :content first)
-                 :club  (-> (nth (-> % :content) 11) :content first)
-                 )
-      (drop 3 lines)))))
+  (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
+        chip (if (has-chip? (nth lines 2)) 1 0)]
+    (filter #(and
+               (not= (count (:content %)) 3)
+               (:content (second (:content %))))
+      (vec
+       (map
+        #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
+                   :gun   (-> (nth (-> % :content) 3) :content first)
+                   :chip  (if-not (zero? chip) (-> (nth (-> % :content) 4) :content first))
+                   :name  (-> (nth (-> % :content) (+ 7 chip)) :content first :content first)
+                   :cat   (-> (nth (-> % :content) (+ 9 chip)) :content first)
+                   :sex   (-> (nth (-> % :content) (+ 10 chip)) :content first)
+                   :club  (-> (nth (-> % :content) (+ 11 chip)) :content first))
+         (drop 3 lines))))))
 
-(retrieve-rb-race-runners-gun (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")
-                                       )
+(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481"))
+
+;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))
+;229420 this one doesn't work because it has a second table on the same page
+;<tr style="background-color:Transparent;"><td colspan="49"><a name="r2"></a><b>5K B</b></td></tr>
+(:content (second (:content (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))
+                                                                        )) 91))))
+
+
+
+
 (defn retrieve-rb-race-runners-chip
   "#WIP"
   [rb-race]
-  (let [lines
-        (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))]
-    (vec
-     (map
-      #(hash-map :pos   (-> % :content)
-;                 :gun   (-> (nth (-> % :content) 3) :content first)
-;                 :chip  (nth (-> % :content) 4)
-;                 :name  (-> (nth (-> % :content) 7) :content first :content first)
-;                 :cat   (-> (nth (-> % :content) 9) :content first)
-;                 :sex   (-> (nth (-> % :content) 10) :content first)
-;                 :club  (-> (nth (-> % :content) 11) :content first)
-                 )
-      (drop 3 lines)))))
+  (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
+        chip (if (has-chip? (nth lines 2)) 1 0)]
+    (filter #(and
+               (not= (count (:content %)) 3)
+               (:content (second (:content %))))
+      (vec
+       (map
+        #(hash-map :pos   (-> % :content))
+      (drop 3 lines))))))
 
-(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
-                                       )
+(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481"))
+(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))
+
 
 (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
                                                  (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
-                                                 ))) 2)
+                                                 ))) 1)
+
+(nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")
+                                                 ))) 3)
 
 
 (comment
