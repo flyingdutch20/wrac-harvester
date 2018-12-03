@@ -114,6 +114,10 @@
 (retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
                                        )
 
+(retrieve-rb-race-runners-chip (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")
+                               )
+
+
 (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
                                                  (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")
                                                  ))) 2)
