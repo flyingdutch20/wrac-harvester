@@ -84,7 +84,7 @@
      (map
       #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
                  :gun   (-> (nth (-> % :content) 3) :content first)
-   ;              :chip  (nth (-> % :content) 4)
+                 :chip  (nth (-> % :content) 4)
                  :name  (-> (nth (-> % :content) 7) :content first :content first)
                  :cat   (-> (nth (-> % :content) 9) :content first)
                  :sex   (-> (nth (-> % :content) 10) :content first)
@@ -101,13 +101,13 @@
         (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))]
     (vec
      (map
-      #(hash-map :pos   (-> % :content)
-;                 :gun   (-> (nth (-> % :content) 3) :content first)
-;                 :chip  (nth (-> % :content) 4)
-;                 :name  (-> (nth (-> % :content) 7) :content first :content first)
-;                 :cat   (-> (nth (-> % :content) 9) :content first)
-;                 :sex   (-> (nth (-> % :content) 10) :content first)
-;                 :club  (-> (nth (-> % :content) 11) :content first)
+      #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
+                 :gun   (-> (nth (-> % :content) 3) :content first)
+                 :chip  (nth (-> % :content) 4)
+                 :name  (-> (nth (-> % :content) 7) :content first :content first)
+                 :cat   (-> (nth (-> % :content) 9) :content first)
+                 :sex   (-> (nth (-> % :content) 10) :content first)
+                 :club  (-> (nth (-> % :content) 11) :content first)
                  )
       (drop 3 lines)))))
 
