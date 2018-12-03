@@ -113,35 +113,35 @@
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")) ; multiple races on one page
 
 
-(defn retrieve-all-rb-race-runners
-  [rb-race]
-=======
-  (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
-        chip (if (has-chip? (nth lines 2)) 1 0)
-        filtered (filter-race-lines lines)]
-      (vec
-       (map
-        #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
-                   :gun   (-> (nth (-> % :content) 3) :content first)
-                   :chip  (if-not (zero? chip) (-> (nth (-> % :content) 4) :content first))
-                   :name  (-> (nth (-> % :content) (+ 7 chip)) :content first :content first)
-                   :cat   (-> (nth (-> % :content) (+ 9 chip)) :content first)
-                   :sex   (-> (nth (-> % :content) (+ 10 chip)) :content first)
-                   :club  (-> (nth (-> % :content) (+ 11 chip)) :content first))
-         filtered))))
-
-;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ; just gun time
-;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481")) ; gun time and chip time
-;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")) ; multiple races on one page
-
 
 (defn retrieve-all-rb-race-runners
   [rb-race]
   (let [firstpage (retrieve-rb-race-runners rb-race)
         pages (retrieve-rb-race-pages rb-race)]
+;    (into firstpage
+;          (retrieve-rb-race-runners
+;            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page (first pages))))))))
 
-    (into firstpage
-          (retrieve-rb-race-runners
-            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page (first pages))))))))
+    (map #(into firstpage (retrieve-rb-race-runners
+            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page %)))))
+         pages)))
 
-(count (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+
+
+(def first [{:a 1} {:a 2}])
+(def rest {[{:a 3} {:a 4}] [{:a 5} {:a 6}]})
+
+(#(into first %) rest)
+
+
+(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+;(retrieve-all-rb-race-runners)
+
+(def race (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+(retrieve-rb-race-runners race)
+(retrieve-rb-race-pages race)
+
+
+
+(count (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241")))
+(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
