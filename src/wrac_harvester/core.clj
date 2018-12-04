@@ -97,7 +97,7 @@
   (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
         chip (if (has-chip? (nth lines 2)) 1 0)
         filtered (filter-race-lines lines)]
-      (vec
+    (vec
        (map
         #(hash-map :pos   (-> (nth (-> % :content) 2) :content first)
                    :gun   (-> (nth (-> % :content) 3) :content first)
@@ -118,23 +118,35 @@
   [rb-race]
   (let [firstpage (retrieve-rb-race-runners rb-race)
         pages (retrieve-rb-race-pages rb-race)]
+    (into firstpage
+          (flatten
+            (map
+              #(retrieve-rb-race-runners
+                 (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page %))))
+              pages)))))
+
 ;    (into firstpage
 ;          (retrieve-rb-race-runners
 ;            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page (first pages))))))))
-
-    (map #(into firstpage (retrieve-rb-race-runners
-            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page %)))))
-         pages)))
+;(doseq [page pages] (into firstpage page))
+;    (count firstpage)))
+;    (map #(into firstpage (retrieve-rb-race-runners
+;            (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page %)))))
+;         pages)))
 
 
 
 (def first [{:a 1} {:a 2}])
-(def rest {[{:a 3} {:a 4}] [{:a 5} {:a 6}]})
-
-(#(into first %) rest)
+(def rest [[{:a 3} {:a 4}] [{:a 5} {:a 6}]])
 
 
-(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+(into first
+      (flatten rest))
+
+(map #(println %) rest)
+
+
+(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 ;(retrieve-all-rb-race-runners)
 
 (def race (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
