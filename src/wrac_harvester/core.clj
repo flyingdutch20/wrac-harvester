@@ -131,3 +131,36 @@
 ;(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 ;(count (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))) ; 6 pages - 1500 runners
 ;(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
+
+
+(defn get-wetherby-runners
+  [runners]
+  (filter #(re-find #"(etherby)" (:club %)) runners))
+
+;(get-wetherby-runners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+
+(defn winners
+  [runners]
+  (filter #(= "1" (:pos %)) runners))
+
+(defn single-race?
+  [runners]
+  (= 1 (count (winners runners))))
+
+(winners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+(winners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")))
+(single-race? (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+(single-race? (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")))
+
+(defn first-male
+  [runners]
+  (first (filter #(= "M" (:sex %)) runners)))
+
+(defn first-female
+  [runners]
+  (first (filter #(= "W" (:sex %)) runners)))
+
+(first-male (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+(first-female (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+
+
