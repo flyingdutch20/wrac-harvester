@@ -147,10 +147,10 @@
   [runners]
   (= 1 (count (winners runners))))
 
-(winners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
-(winners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")))
-(single-race? (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
-(single-race? (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")))
+;(winners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+;(winners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")))
+;(single-race? (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+;(single-race? (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")))
 
 (defn first-male
   [runners]
@@ -160,7 +160,39 @@
   [runners]
   (first (filter #(= "W" (:sex %)) runners)))
 
-(first-male (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
-(first-female (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+;(first-male (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+;(first-female (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
 
+(defn print-winner
+  [runner]
+  (str (:pos runner) " " (:name runner) " - " (:club runner) " (" (if (:chip runner) (:chip runner) (:gun runner)) ")"))
+
+(print-winner (first-male (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))))
+(print-winner (first-female (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))))
+
+
+(defn retrieve-race-name
+  [rb-race]
+  (let [header (-> (s/select (s/id :cphBody_lblMeetingDetails) rb-race) first :content)]
+    (str
+      (nth header (dec (count header)))
+      " - "
+      (-> header first :content first)
+    )))
+
+;(retrieve-race-name (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+
+(defn create-race-output
+  [rb-race]
+  (let [runners (retrieve-all-rb-race-runners rb-race)
+        wetherby-runners (get-wetherby-runners runners)]
+    (if (not-empty wetherby-runners)
+      (str
+        ";" (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
+        ";" "First man " (print-winner (first-male runners)) " - first woman " (print-winner (first-female runners)) "\n"
+        "\n"
+        ))))
+
+
+(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 
