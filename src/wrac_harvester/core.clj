@@ -165,10 +165,10 @@
 
 (defn print-winner
   [runner]
-  (str (:pos runner) " " (:name runner) " - " (:club runner) " (" (if (:chip runner) (:chip runner) (:gun runner)) ")"))
+  (str "("(:pos runner) ") " (:name runner) " - " (:club runner) " (" (if (:chip runner) (:chip runner) (:gun runner)) ")"))
 
-(print-winner (first-male (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))))
-(print-winner (first-female (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))))
+;(print-winner (first-male (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))))
+;(print-winner (first-female (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))))
 
 
 (defn retrieve-race-name
@@ -187,11 +187,12 @@
   (let [runners (retrieve-all-rb-race-runners rb-race)
         wetherby-runners (get-wetherby-runners runners)]
     (if (not-empty wetherby-runners)
-      (str
-        ";" (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
-        ";" "First man " (print-winner (first-male runners)) " - first woman " (print-winner (first-female runners)) "\n"
-        "\n"
-        ))))
+      (spit (str (retrieve-race-name rb-race) ".csv")
+            (str
+              "," (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
+              "," "First man " (print-winner (first-male runners)) " - first woman " (print-winner (first-female runners)) "\n"
+              "\n"
+        )))))
 
 
 (create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
