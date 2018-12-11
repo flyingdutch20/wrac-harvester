@@ -182,6 +182,24 @@
 
 ;(retrieve-race-name (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 
+(defn create-runners-output
+  [runners]
+  (map #(str
+         ","
+         (:pos %)
+         ","
+         (:name %)
+         ","
+         (:sex %)
+         (:cat %)
+         ","
+         (if (< (count (:gun %)) 6) "0:")
+         (if (:chip %) (:chip %) (:gun %))
+         "\n")
+       runners))
+
+;(create-runners-output (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+
 (defn create-race-output
   [rb-race]
   (let [runners (retrieve-all-rb-race-runners rb-race)
@@ -192,8 +210,10 @@
               "," (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
               "," "First man " (print-winner (first-male runners)) " - first woman " (print-winner (first-female runners)) "\n"
               "\n"
+              ",Pos,Name,Cat,Time\n"
+              (string/join (create-runners-output wetherby-runners))
+              "\n"
         )))))
 
 
-(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
-
+;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
