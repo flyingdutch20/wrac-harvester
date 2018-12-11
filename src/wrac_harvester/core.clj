@@ -12,9 +12,10 @@
   [& args]
   (println "Hello, World!"))
 
-(def rb-index (-> (client/get "https://www.runbritainrankings.com/results/resultslookup.aspx") :body parse as-hickory))
+(def rb-base-url "https://www.runbritainrankings.com")
+(def rb-index (-> (client/get (str rb-base-url "/results/resultslookup.aspx")) :body parse as-hickory))
 
-;(-> (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))
+(-> (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))
 
 (defn retrieve-rb-urls
   "Returns a vector of maps for each sub-category on the current category"
@@ -96,7 +97,7 @@
 (defn retrieve-rb-race-runners
   [rb-race]
   (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
-        chip (if (has-chip? (nth lines 2)) 1 0)
+        chip (if (and (not-empty lines) (has-chip? (nth lines 2))) 1 0)
         filtered (filter-race-lines lines)]
     (vec
        (map
@@ -216,4 +217,35 @@
         )))))
 
 
-;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+
+
+(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
+
+(defn output-wrac-rb-results-for-date
+  [date]
+  (let [urls (retrieve-rb-urls-for-date rb-index date)]
+    (doseq [url urls]
+      (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
+
+(defn output-wrac-rb-results-for-date-string
+  [date-string]
+  (let [date (extract-date-from date-string)]
+    (output-wrac-rb-results-for-date date)))
+
+(output-wrac-rb-results-for-date-string "01 Nov 2018")
+
+(defn output-wrac-rb-results-for-last-two-weeks
+  []
+  (let [date (dt/minus (dt/now) (dt/weeks 2))]
+    (output-wrac-rb-results-for-date date)))
+
+;(output-wrac-rb-results-for-last-two-weeks)
+
+(defn output-wrac-rb-results
+  []
+  (let [urls (retrieve-rb-urls rb-index)]
+    (doseq [url urls]
+      (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
+
+(output-wrac-rb-results)
