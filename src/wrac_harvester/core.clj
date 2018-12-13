@@ -4,7 +4,8 @@
             [clj-http.client :as client]
             [clj-time.core :as dt]
             [clj-time.format :as fdt]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [clojure.java.io :as io])
   (:gen-class))
 
 (defn -main
@@ -63,8 +64,17 @@
 ;(retrieve-rb-race-header (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
 
 (defn has-chip?
-  [rb-race-header-line]
-  (= (-> (nth (-> rb-race-header-line :content) 4) :content first :content first) "Chip"))
+  [lines]
+; loop through the lines until you find "Pos". Then check if it has "Chip".
+;  (let [line (first
+;               (filter #(= ((nth (:content %) 2) :content first) "Pos")
+;                       lines))]
+;    (= (-> (nth (:content line) 4) :content first :content first) "Chip"))
+
+;  (let [rb-race-header-line]
+;  (= (-> (nth (-> rb-race-header-line :content) 4) :content first :content first) "Chip"))
+  true)
+
 
 ;(has-chip? (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
 ;                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))))))
@@ -97,7 +107,7 @@
 (defn retrieve-rb-race-runners
   [rb-race]
   (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
-        chip (if (and (not-empty lines) (has-chip? (nth lines 2))) 1 0)
+        chip (if (has-chip? lines) 1 0)
         filtered (filter-race-lines lines)]
     (vec
        (map
@@ -116,6 +126,7 @@
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=268481")) ; gun time and chip time
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420")) ; multiple races on one page
 ;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241")) ; 6 pages
+;(retrieve-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")) ; Wetherby 10k
 
 
 (defn retrieve-all-rb-race-runners
@@ -123,7 +134,9 @@
   (let [firstpage (retrieve-rb-race-runners rb-race)
         pages (retrieve-rb-race-pages rb-race)]
     (into firstpage
-          (flatten
+          (apply concat
+
+;          (flatten
             (map
               #(retrieve-rb-race-runners
                  (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page %))))
@@ -132,6 +145,8 @@
 ;(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 ;(count (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))) ; 6 pages - 1500 runners
 ;(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
+;(count (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411"))) ; 4 pages - 873 runners
+;(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")) ; 4 pages - 873 runners
 
 
 (defn get-wetherby-runners
@@ -139,6 +154,9 @@
   (filter #(re-find #"(etherby)" (:club %)) runners))
 
 ;(get-wetherby-runners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))
+;(get-wetherby-runners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")))
+;(count (get-wetherby-runners (retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")))) ; 4 pages - 873 runners
+
 
 (defn winners
   [runners]
@@ -205,22 +223,26 @@
   [rb-race]
   (let [runners (retrieve-all-rb-race-runners rb-race)
         wetherby-runners (get-wetherby-runners runners)]
+    (println (str "Processing: " (retrieve-race-name rb-race)))
     (if (not-empty wetherby-runners)
-      (spit (str (retrieve-race-name rb-race) ".csv")
+      (let [filename (str "c:/output/" (retrieve-race-name rb-race) ".csv")]
+        (io/make-parents filename)
+        (spit filename
             (str
               "," (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
               "," "First man " (print-winner (first-male runners)) " - first woman " (print-winner (first-female runners)) "\n"
               "\n"
               ",Pos,Name,Cat,Time\n"
               (string/join (create-runners-output wetherby-runners))
-              "\n"
-        )))))
+              "\n"))
+        (println (str "Created: " filename))))))
 
 
-(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411"))
 
 
-(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
+;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
 
 (defn output-wrac-rb-results-for-date
   [date]
@@ -233,7 +255,7 @@
   (let [date (extract-date-from date-string)]
     (output-wrac-rb-results-for-date date)))
 
-(output-wrac-rb-results-for-date-string "01 Nov 2018")
+;(output-wrac-rb-results-for-date-string "01 Dec 2018")
 
 (defn output-wrac-rb-results-for-last-two-weeks
   []
@@ -248,4 +270,4 @@
     (doseq [url urls]
       (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
 
-(output-wrac-rb-results)
+;(output-wrac-rb-results)
