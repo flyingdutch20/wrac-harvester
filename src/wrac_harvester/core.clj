@@ -63,24 +63,6 @@
 
 ;(retrieve-rb-race-header (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241"))
 
-(defn has-chip?
-  [lines]
-; loop through the lines until you find "Pos". Then check if it has "Chip".
-;  (let [line (first
-;               (filter #(= ((nth (:content %) 2) :content first) "Pos")
-;                       lines))]
-;    (= (-> (nth (:content line) 4) :content first :content first) "Chip"))
-
-;  (let [rb-race-header-line]
-;  (= (-> (nth (-> rb-race-header-line :content) 4) :content first :content first) "Chip"))
-  true)
-
-
-;(has-chip? (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-;                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))))))
-
-;(has-chip? (nth (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-;                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=229420"))))))
 
 
 
@@ -102,6 +84,46 @@
                       (:content (second (:content %)))
                       (> (count (:content (second (:content %)))) 2))
             race-lines))
+
+(defn get-header-line
+  [race-lines]
+  (first
+    (filter #(and
+                      (:content %)
+                      (> (count (:content %)) 6))
+            race-lines)))
+
+(def weth-10k-lines-page1 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")))))
+(def weth-10k-lines-page2 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411&pagenum=2")))))
+;(get-header-line weth-10k-lines-page1)
+;(get-header-line weth-10k-lines-page2)
+
+(defn has-chip?
+  [lines]
+  (let [line (get-header-line lines)]
+  (= (-> (nth (:content line) 4) :content first :content first) "Chip")))
+
+
+(comment
+(def weth-10k-lines-page1 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")))))
+(def weth-10k-lines-page2 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411&pagenum=2")))))
+(def another-lines-page1 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))))
+(def another-lines-page2 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
+                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023&pagenum=2")))))
+)
+
+;(get-header-line weth-10k-lines-page1)
+;(get-header-line weth-10k-lines-page2)
+;(has-chip? weth-10k-lines-page1)
+;(has-chip? weth-10k-lines-page2)
+;(has-chip? another-lines-page1)
+;(has-chip? another-lines-page2)
+
 
 
 (defn retrieve-rb-race-runners
@@ -135,8 +157,6 @@
         pages (retrieve-rb-race-pages rb-race)]
     (into firstpage
           (apply concat
-
-;          (flatten
             (map
               #(retrieve-rb-race-runners
                  (retrieve-rb-race (str "https://www.runbritainrankings.com" (:page %))))
@@ -238,8 +258,8 @@
         (println (str "Created: " filename))))))
 
 
-;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
-;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411"))
+;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ;Dalby Dash
+;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")) ;Wetherby 10k
 
 
 ;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
@@ -270,4 +290,4 @@
     (doseq [url urls]
       (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
 
-;(output-wrac-rb-results)
+(output-wrac-rb-results)
