@@ -8,11 +8,6 @@
             [clojure.java.io :as io])
   (:gen-class))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
-
 (def rb-base-url "https://www.runbritainrankings.com")
 (def rb-index (-> (client/get (str rb-base-url "/results/resultslookup.aspx")) :body parse as-hickory))
 
@@ -264,6 +259,13 @@
 
 ;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
 
+(defn output-wrac-rb-results
+  []
+  (let [urls (retrieve-rb-urls rb-index)]
+    (doseq [url urls]
+      (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
+
+;(output-wrac-rb-results)
 (defn output-wrac-rb-results-for-date
   [date]
   (let [urls (retrieve-rb-urls-for-date rb-index date)]
@@ -272,8 +274,12 @@
 
 (defn output-wrac-rb-results-for-date-string
   [date-string]
-  (let [date (extract-date-from date-string)]
-    (output-wrac-rb-results-for-date date)))
+
+  (let [date (try (extract-date-from date-string)
+               (catch Exception e false))]
+    (if date
+      (output-wrac-rb-results-for-date date)
+      (output-wrac-rb-results))))
 
 ;(output-wrac-rb-results-for-date-string "01 Dec 2018")
 
@@ -284,10 +290,27 @@
 
 ;(output-wrac-rb-results-for-last-two-weeks)
 
-(defn output-wrac-rb-results
-  []
-  (let [urls (retrieve-rb-urls rb-index)]
-    (doseq [url urls]
-      (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
 
-(output-wrac-rb-results)
+(defn harvest
+  ([]
+   (output-wrac-rb-results-for-last-two-weeks))
+  ([arg]
+   (output-wrac-rb-results-for-date-string arg)))
+
+;(try (extract-date-from "all") (catch Exception e false))
+
+
+(defn show-usage
+  "Show help about how to use the program"
+  []
+  (println "Harvest the Wetherby Runners race results from the Run Britain website and store in the folder C:/output")
+  (println "Usage: java -jar wrac-harvester.jar harvest <dd-mm-yyyy>\n")
+  (println "Date is optional. If no date is provided then the last two weeks are harvested.")
+  (println "If <all> (or wrong date) is provided then all races from the index page are harvested.")
+  (println))
+
+(defn -main [& args]
+  (let [command (first args)]
+    (case command
+     "harvest" (harvest (rest args))
+     (show-usage))))
