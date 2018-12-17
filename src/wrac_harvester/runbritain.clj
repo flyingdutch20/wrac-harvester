@@ -120,9 +120,9 @@
                             (-> (nth (:content %) (+ 7 chip)) :content first))
                    :cat   (-> (nth (:content %) (+ 9 chip)) :content first)
                    :sex   (let [sex (-> (nth (:content %) (+ 10 chip)) :content first)]
-                            (case
-                              (= sex "M") "M"
-                              (= sex "W") "F"
+                            (case sex
+                              "M" "M"
+                              "W" "F"
                               ""))
                    :club  (.toLowerCase (-> (nth (:content %) (+ 11 chip)) :content first)))
          filtered))))
@@ -168,19 +168,21 @@
   [rb-race]
   (let [runners (retrieve-all-rb-race-runners rb-race)
         wetherby-runners (utils/get-wetherby-runners runners)]
-    (println (str "Processing: " (retrieve-race-name rb-race)))
-    (if (not-empty wetherby-runners)
-      (let [filename (str "c:/output/" (retrieve-race-name rb-race) ".csv")]
-        (io/make-parents filename)
-        (spit filename
-            (str
-              "," (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
-              "," "First man " (utils/print-winner (utils/first-male runners)) " - first woman " (utils/print-winner (utils/first-female runners)) "\n"
-              "\n"
-              ",Pos,Name,Cat,Time\n"
-              (string/join (utils/create-runners-output wetherby-runners))
-              "\n"))
-        (println (str "Created: " filename))))))
+    (if (not-empty runners)
+      (do
+        (println (str "Processing: " (retrieve-race-name rb-race)))
+        (if (not-empty wetherby-runners)
+          (let [filename (str "c:/output/" (retrieve-race-name rb-race) ".csv")]
+            (io/make-parents filename)
+            (spit filename
+                  (str
+                    "," (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
+                    "," "First man " (utils/print-winner (utils/first-male runners)) " - first woman " (utils/print-winner (utils/first-female runners)) "\n"
+                    "\n"
+                    ",Pos,Name,Cat,Time\n"
+                  (string/join (utils/create-runners-output wetherby-runners))
+                    "\n"))
+            (println (str "Created: " filename))))))))
 
 
 ;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ;Dalby Dash
@@ -195,6 +197,7 @@
     (doseq [url urls]
       (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
 
+
 ;(output-wrac-rb-results)
 (defn output-wrac-rb-results-for-date
   [date]
@@ -204,16 +207,19 @@
 
 (defn output-wrac-rb-results-for-date-string
   [date-string]
-
+  (println date-string)
+  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting https://www.runbritainrankings.com"))
   (let [date (try (utils/extract-date-from date-string)
                (catch Exception e false))]
     (if date
       (output-wrac-rb-results-for-date date)
-      (output-wrac-rb-results))))
+      (output-wrac-rb-results)))
+  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting https://www.runbritainrankings.com"))
+  )
 
 ;(try (utils/extract-date-from "all") (catch Exception e false))
 
-;(output-wrac-rb-results-for-date-string "10 Dec 2018")
+;(output-wrac-rb-results-for-date-string "16 Dec 2018")
 
 (defn output-wrac-rb-results-for-last-two-weeks
   []
@@ -221,5 +227,6 @@
     (output-wrac-rb-results-for-date date)))
 
 ;(output-wrac-rb-results-for-last-two-weeks)
+
 
 

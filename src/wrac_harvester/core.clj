@@ -24,7 +24,10 @@
 
 (defn -main [& args]
   (let [command (first args)]
-    (case command
-     "harvest" (harvest (rest args))
-     (show-usage))))
+    (if (= command "harvest")
+      (harvest (rest args))
+      (show-usage))))
+;    (case command
+;     "harvest" (harvest (rest args))
+;     (show-usage))))
 
