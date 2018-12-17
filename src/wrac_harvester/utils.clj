@@ -11,3 +11,43 @@
 
 ;(extract-date-from "Mon 13 Tue 1 Nov 2018")
 
+(defn get-wetherby-runners
+  [runners]
+  (filter #(re-find #"(wetherby)" (:club %)) runners))
+
+(defn winners
+  [runners]
+  (filter #(= "1" (:pos %)) runners))
+
+(defn single-race?
+  [runners]
+  (= 1 (count (winners runners))))
+
+(defn first-male
+  [runners]
+  (first (filter #(= "M" (:sex %)) runners)))
+
+(defn first-female
+  [runners]
+  (first (filter #(= "F" (:sex %)) runners)))
+
+(defn create-runners-output
+  [runners]
+  (map #(str
+         ","
+         (:pos %)
+         ","
+         (:name %)
+         ","
+         (:sex %)
+         (:cat %)
+         ","
+         (if (< (count (:gun %)) 6) "0:")
+         (if (:chip %) (:chip %) (:gun %))
+         "\n")
+       runners))
+
+(defn print-winner
+  [runner]
+  (str "("(:pos runner) ") " (:name runner) " - " (:club runner) " (" (if (:chip runner) (:chip runner) (:gun runner)) ")"))
+
