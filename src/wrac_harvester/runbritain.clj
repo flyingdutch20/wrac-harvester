@@ -16,26 +16,26 @@
 
 (defn retrieve-rb-urls
   "Returns a vector of maps for each sub-category on the current category"
-  [rb-index]
+  []
   (let [links (s/select (s/child (s/tag :tr))  (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index)))]
     (vec
      (map
-      #(hash-map :date (-> % :content second :content first :content first)
+      #(hash-map :date (utils/extract-date-from (-> % :content second :content first :content first))
                  :url  (-> (nth (-> % :content) 5) :content first :content first :attrs :href))
       links))))
 
-;(retrieve-rb-urls rb-index)
+;(retrieve-rb-urls)
 
 
 (defn retrieve-rb-urls-for-date
-  [rb-index date]
+  [date]
   (def comp-date (dt/plus date (dt/days -1)))
   (filter #(and
              (% :url)
-             (dt/after? (utils/extract-date-from (% :date)) comp-date))
-          (retrieve-rb-urls rb-index)))
+             (dt/after? (:date %) comp-date))
+          (retrieve-rb-urls)))
 
-;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
+;(retrieve-rb-urls-for-date (dt/date-time 2018 11 23))
 
 
 (defn retrieve-rb-race
@@ -193,7 +193,7 @@
 
 (defn output-wrac-rb-results
   []
-  (let [urls (retrieve-rb-urls rb-index)]
+  (let [urls (retrieve-rb-urls)]
     (doseq [url urls]
       (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
 
@@ -201,7 +201,7 @@
 ;(output-wrac-rb-results)
 (defn output-wrac-rb-results-for-date
   [date]
-  (let [urls (retrieve-rb-urls-for-date rb-index date)]
+  (let [urls (utils/filter-site-urls-for-date retrieve-rb-urls date)]
     (doseq [url urls]
       (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
 
