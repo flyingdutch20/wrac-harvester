@@ -1,7 +1,8 @@
 (ns wrac-harvester.core
   (:use [hickory.core])
   (:require
-            [wrac-harvester.runbritain :as rb])
+            [wrac-harvester.runbritain :as rb]
+            [wrac-harvester.ukresults :as ukr])
   (:gen-class))
 
 

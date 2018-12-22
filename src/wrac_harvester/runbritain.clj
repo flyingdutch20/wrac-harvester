@@ -153,18 +153,18 @@
 ;(retrieve-all-rb-race-runners (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")) ; 4 pages - 873 runners
 
 
-(defn retrieve-race-name
+(defn retrieve-rb-race-name
   [rb-race]
   (let [header (-> (s/select (s/id :cphBody_lblMeetingDetails) rb-race) first :content)]
     (str
       (nth header (dec (count header)))
-      " - "
+      " - Run Britain - "
       (-> header first :content first)
     )))
 
 ;(retrieve-race-name (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 
-(defn create-race-output
+(defn create-rb-race-output
   [rb-race]
   (let [runners (retrieve-all-rb-race-runners rb-race)
         wetherby-runners (utils/get-wetherby-runners runners)]
