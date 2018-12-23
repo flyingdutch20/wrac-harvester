@@ -12,12 +12,12 @@
 (def rb-base-url "https://www.runbritainrankings.com")
 (def rb-index (-> (client/get (str rb-base-url "/results/resultslookup.aspx")) :body parse as-hickory))
 
-;(-> (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))
+;(rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))))
 
 (defn retrieve-rb-urls
   "Returns a vector of maps for each sub-category on the current category"
   []
-  (let [links (s/select (s/child (s/tag :tr))  (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index)))]
+  (let [links (rest (s/select (s/child (s/tag :tr))  (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))))]
     (vec
      (map
       #(hash-map :date (utils/extract-date-from (-> % :content second :content first :content first))
@@ -157,8 +157,9 @@
   [rb-race]
   (let [header (-> (s/select (s/id :cphBody_lblMeetingDetails) rb-race) first :content)]
     (str
+      "Run Britain - "
       (nth header (dec (count header)))
-      " - Run Britain - "
+      " - "
       (-> header first :content first)
     )))
 
@@ -170,13 +171,13 @@
         wetherby-runners (utils/get-wetherby-runners runners)]
     (if (not-empty runners)
       (do
-        (println (str "Processing: " (retrieve-race-name rb-race)))
+        (println (str "Processing: " (retrieve-rb-race-name rb-race)))
         (if (not-empty wetherby-runners)
-          (let [filename (str "c:/output/" (retrieve-race-name rb-race) ".csv")]
+          (let [filename (str "c:/output/" (retrieve-rb-race-name rb-race) ".csv")]
             (io/make-parents filename)
             (spit filename
                   (str
-                    "," (retrieve-race-name rb-race) " - " (count runners) " runners" "\n"
+                    "," (retrieve-rb-race-name rb-race) " - " (count runners) " runners" "\n"
                     "," "First man " (utils/print-winner (utils/first-male runners)) " - first woman " (utils/print-winner (utils/first-female runners)) "\n"
                     "\n"
                     ",Pos,Name,Cat,Time\n"
@@ -191,42 +192,44 @@
 
 ;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
 
-(defn output-wrac-rb-results
-  []
-  (let [urls (retrieve-rb-urls)]
-    (doseq [url urls]
-      (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
-
-
-;(output-wrac-rb-results)
 (defn output-wrac-rb-results-for-date
   [date]
+  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting https://www.runbritainrankings.com"))
   (let [urls (utils/filter-site-urls-for-date retrieve-rb-urls date)]
     (doseq [url urls]
-      (create-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
+      (create-rb-race-output (retrieve-rb-race (str rb-base-url (:url url))))))
+  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting https://www.runbritainrankings.com"))
+  )
 
 (defn output-wrac-rb-results-for-date-string
   [date-string]
-  (println date-string)
-  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting https://www.runbritainrankings.com"))
   (let [date (try (utils/extract-date-from date-string)
                (catch Exception e false))]
     (if date
       (output-wrac-rb-results-for-date date)
       (output-wrac-rb-results)))
-  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting https://www.runbritainrankings.com"))
   )
 
 ;(try (utils/extract-date-from "all") (catch Exception e false))
 
 ;(output-wrac-rb-results-for-date-string "16 Dec 2018")
 
+(defn output-wrac-rb-results
+  []
+  (let [urls (retrieve-rb-urls)]
+    (doseq [url urls]
+      (create-rb-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
+
+
+;(output-wrac-rb-results)
+
 (defn output-wrac-rb-results-for-last-two-weeks
   []
   (let [date (dt/minus (dt/now) (dt/weeks 2))]
     (output-wrac-rb-results-for-date date)))
 
-;(output-wrac-rb-results-for-last-two-weeks)
+(output-wrac-rb-results-for-last-two-weeks)
 
 
 
+; comment for debugger

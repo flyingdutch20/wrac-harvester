@@ -28,7 +28,7 @@
                  :url  (-> % :content second :content first :attrs :href))
       filtered))))
 
-;(retrieve-ukr-urls)
+;(first (retrieve-ukr-urls))
 
 (defn retrieve-ukr-urls-for-date
   [date]
@@ -60,9 +60,7 @@
 ;(retrieve-ukr-race-header (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))
 ;(:content (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))))
 
-(first (rest (s/select (s/child (s/tag :tr))
-          (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-ukr-race "http://ukresults.net/2018/dalby.html")))
-          )))
+;(first (rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))))))
 
 (comment
   {:type :element, :attrs nil, :tag :tr, :content [
@@ -80,9 +78,16 @@
   )
 
 
+(defn filter-race-lines
+  [race-lines]
+    (filter #(> (count (:content %)) 9)
+            race-lines))
+
+
 (defn retrieve-all-ukr-race-runners
   [ukr-race]
-  (let [lines (rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) ukr-race))))]
+  (let [lines (rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) ukr-race))))
+        filtered (filter-race-lines lines)]
     (vec
        (map
         #(hash-map :pos   (-> (nth (:content %) 0) :content first)
@@ -94,20 +99,24 @@
                               "M"
                               "F")
                    :club  (.toLowerCase (-> (nth (:content %) 7) :content first)))
-         lines))))
+         filtered))))
 
+
+;(count (:content (first (rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))))))))
+;(retrieve-all-ukr-race-runners (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))
 ;(utils/get-wetherby-runners (retrieve-all-ukr-race-runners (retrieve-ukr-race "http://ukresults.net/2018/dalby.html")))
 
 (defn retrieve-race-name
   [ukr-race]
   (let [header (retrieve-ukr-race-header ukr-race)]
     (str
+      "UK Results - "
       (:date header)
-      " - UK Results - "
+      " - "
       (:name header)
     )))
 
-;(retrieve-ukr-race-name (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))
+;(retrieve-race-name (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))
 
 (defn create-race-output
   [ukr-race]
@@ -129,47 +138,50 @@
                     "\n"))
             (println (str "Created: " filename))))))))
 
-;(create-ukr-race-output (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))
-
-(defn output-wrac-ukr-results
-  []
-  (let [urls (retrieve-ukr-urls)]
-    (doseq [url urls]
-      (create-ukr-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url url)))))))
-
-
-(create-ukr-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url (first (retrieve-ukr-urls))))))
-
-(output-wrac-ukr-results)
+;(create-race-output (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))
+;(create-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url (first (retrieve-ukr-urls))))))
 
 (defn output-wrac-ukr-results-for-date
   [date]
+  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting http://ukresults.net"))
   (let [urls (utils/filter-site-urls-for-date retrieve-ukr-urls date)]
     (doseq [url urls]
-      (create-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url url)))))))
+      (create-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url url))))))
+  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting http://ukresults.net"))
+  )
+
 
 (defn output-wrac-ukr-results-for-date-string
   [date-string]
-  (println date-string)
-  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting http://www.ukresults.net"))
   (let [date (try (utils/extract-date-from date-string)
                (catch Exception e false))]
     (if date
       (output-wrac-ukr-results-for-date date)
       (output-wrac-ukr-results)))
-  (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting http://www.ukresults.net"))
   )
 
 ;(try (utils/extract-date-from "all") (catch Exception e false))
 
-;(output-wrac-rb-results-for-date-string "16 Dec 2018")
+;(output-wrac-ukr-results-for-date-string "11 Nov 2018")
+
+(defn output-wrac-ukr-results
+  []
+  (output-wrac-ukr-results-for-date-string (str "01 Jan " current-year)))
+
+;(output-wrac-ukr-results)
+
+(defn output-wrac-ukr-results-for-number-of-weeks
+  [weeks]
+  (let [date (dt/minus (dt/now) (dt/weeks weeks))]
+    (output-wrac-ukr-results-for-date date)))
+
+
 
 (defn output-wrac-ukr-results-for-last-two-weeks
   []
-  (let [date (dt/minus (dt/now) (dt/weeks 2))]
-    (output-wrac-ukr-results-for-date date)))
+  (output-wrac-ukr-results-for-number-of-weeks 2))
 
-;(output-wrac-ukr-results-for-last-two-weeks)
+(output-wrac-ukr-results-for-last-two-weeks)
 
 
 

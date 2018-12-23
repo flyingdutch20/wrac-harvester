@@ -5,6 +5,11 @@
             [wrac-harvester.ukresults :as ukr])
   (:gen-class))
 
+(defn harvest-for-last-two-weeks
+  []
+  (rb/output-wrac-rb-results-for-last-two-weeks)
+  (ukr/output-wrac-ukr-results-for-last-two-weeks))
+
 
 (defn harvest
   ([]
