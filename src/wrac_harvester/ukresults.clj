@@ -180,7 +180,7 @@
   []
   (output-wrac-ukr-results-for-number-of-weeks 2))
 
-(output-wrac-ukr-results-for-last-two-weeks)
+; (output-wrac-ukr-results-for-last-two-weeks)
 
 
 
