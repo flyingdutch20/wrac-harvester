@@ -156,19 +156,18 @@
   (let [date (try (utils/extract-date-from date-string)
                (catch Exception e false))]
     (if date
-      (output-wrac-ukr-results-for-date date)
-      (output-wrac-ukr-results)))
-  )
-
-;(try (utils/extract-date-from "all") (catch Exception e false))
-
-;(output-wrac-ukr-results-for-date-string "11 Nov 2018")
+      (output-wrac-ukr-results-for-date date))))
 
 (defn output-wrac-ukr-results
   []
   (output-wrac-ukr-results-for-date-string (str "01 Jan " current-year)))
 
 ;(output-wrac-ukr-results)
+
+;(try (utils/extract-date-from "all") (catch Exception e false))
+
+;(output-wrac-ukr-results-for-date-string "11 Nov 2018")
+
 
 (defn output-wrac-ukr-results-for-number-of-weeks
   [weeks]

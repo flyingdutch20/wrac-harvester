@@ -201,6 +201,25 @@
   (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting https://www.runbritainrankings.com"))
   )
 
+(defn output-wrac-rb-results
+  []
+  (let [urls (retrieve-rb-urls)]
+    (doseq [url urls]
+      (create-rb-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
+
+;(output-wrac-rb-results)
+
+(defn output-wrac-rb-results-for-number-of-weeks
+  [weeks]
+  (let [date (dt/minus (dt/now) (dt/weeks weeks))]
+    (output-wrac-rb-results-for-date date)))
+
+(defn output-wrac-rb-results-for-last-two-weeks
+  []
+  (output-wrac-rb-results-for-number-of-weeks 2))
+
+;(output-wrac-rb-results-for-last-two-weeks)
+
 (defn output-wrac-rb-results-for-date-string
   [date-string]
   (let [date (try (utils/extract-date-from date-string)
@@ -213,22 +232,6 @@
 ;(try (utils/extract-date-from "all") (catch Exception e false))
 
 ;(output-wrac-rb-results-for-date-string "16 Dec 2018")
-
-(defn output-wrac-rb-results
-  []
-  (let [urls (retrieve-rb-urls)]
-    (doseq [url urls]
-      (create-rb-race-output (retrieve-rb-race (str rb-base-url (:url url)))))))
-
-
-;(output-wrac-rb-results)
-
-(defn output-wrac-rb-results-for-last-two-weeks
-  []
-  (let [date (dt/minus (dt/now) (dt/weeks 2))]
-    (output-wrac-rb-results-for-date date)))
-
-(output-wrac-rb-results-for-last-two-weeks)
 
 
 
