@@ -8,5 +8,7 @@
                  [hickory "0.7.1"]
                  [clj-http "3.9.1"]]
   :main ^:skip-aot wrac-harvester.core
+  :source-paths ["src"]
   :target-path "target/%s"
+  :repl-options {:port 8081}
   :profiles {:uberjar {:aot :all}})
