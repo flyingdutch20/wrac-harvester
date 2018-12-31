@@ -1,30 +1,50 @@
 (ns wrac-harvester.core
   (:use [hickory.core])
   (:require
-            [wrac-harvester.runbritain :as rb])
+            [wrac-harvester.runbritain :as rb]
+            [wrac-harvester.ukresults :as ukr])
   (:gen-class))
 
+(defn harvest-for-number-of-weeks
+  [weeks]
+  (rb/output-wrac-rb-results-for-number-of-weeks weeks)
+  (ukr/output-wrac-ukr-results-for-number-of-weeks weeks))
+
+(defn harvest-for-last-two-weeks
+  []
+  (harvest-for-number-of-weeks 2))
 
 (defn harvest
   ([]
-   (rb/output-wrac-rb-results-for-last-two-weeks))
-  ([arg]
-   (rb/output-wrac-rb-results-for-date-string arg)))
+   (harvest-for-last-two-weeks))
+  ([args]
+   (let [weeks (try (biginteger (first args)) (catch Exception e 0))]
+     (if (> weeks 0)
+       (harvest-for-number-of-weeks weeks)
+       (harvest-for-last-two-weeks)))))
 
-;(harvest "10 Dec 2018")
+
+;(biginteger "1")
+;(try (biginteger ("a")) (catch Exception e 0))
+;(harvest "4")
 
 (defn show-usage
   "Show help about how to use the program"
   []
-  (println "Harvest the Wetherby Runners race results from the Run Britain website and store in the folder C:/output")
-  (println "Usage: java -jar wrac-harvester.jar harvest <dd-mm-yyyy>\n")
-  (println "Date is optional. If no date is provided then the last two weeks are harvested.")
-  (println "If <all> (or wrong date) is provided then all races from the index page are harvested.")
+  (println "Harvest the Wetherby Runners race results from several websites and store in the folder C:/output")
+  (println "Usage: java -jar wrac-harvester.jar harvest <weeks>\n")
+  (println "Weeks is optional. If no number is provided then the last two weeks are harvested.")
   (println))
 
 (defn -main [& args]
   (let [command (first args)]
-    (case command
-     "harvest" (harvest (rest args))
-     (show-usage))))
+    (if (= command "harvest")
+      (harvest (rest args))
+      (show-usage))))
+;    (case command
+;     "harvest" (harvest (rest args))
+;     (show-usage))))
 
+;(-main)
+;(-main "harvest")
+;(-main "harvest" "1")
