@@ -31,13 +31,6 @@
       filtered))))
 
 ;(s/select (s/child (s/tag :tr)) ukr-index)
-(comment
-(filter #(and
-         (string? (-> % :content first :content first))
-        (> (count (-> % :content first :content first)) 4))
-            (s/select (s/child (s/tag :tr)) ukr-index))
-)
-
 ;(first (retrieve-ukr-urls))
 
 (defn retrieve-ukr-urls-for-date
@@ -74,21 +67,6 @@
 ;(first (:content (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html")))))
 
 ;(first (rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-ukr-race "http://ukresults.net/2018/dalby.html"))))))
-
-(comment
-  {:type :element, :attrs nil, :tag :tr, :content [
-                                                    {:type :element, :attrs nil, :tag :td, :content ["1"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["220"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["001"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content [" "]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["Gareth Green"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["M40"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["(001/038)"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["York Knavesmire Harriers"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["03.29/05.37"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content ["00:34:51"]}
-                                                    {:type :element, :attrs nil, :tag :td, :content [" "]}]}
-  )
 
 
 (defn filter-race-lines

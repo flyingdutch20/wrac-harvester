@@ -85,26 +85,6 @@
   (= (-> (nth (:content line) 4) :content first :content first) "Chip")))
 
 
-(comment
-(def weth-10k-lines-page1 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")))))
-(def weth-10k-lines-page2 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411&pagenum=2")))))
-(def another-lines-page1 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")))))
-(def another-lines-page2 (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child)
-                                                 (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023&pagenum=2")))))
-)
-
-;(get-header-line weth-10k-lines-page1)
-;(get-header-line weth-10k-lines-page2)
-;(has-chip? weth-10k-lines-page1)
-;(has-chip? weth-10k-lines-page2)
-;(has-chip? another-lines-page1)
-;(has-chip? another-lines-page2)
-
-
-
 (defn retrieve-rb-race-runners
   [rb-race]
   (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
