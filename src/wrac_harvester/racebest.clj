@@ -169,7 +169,7 @@
 
 (defn create-race-output
   [race]
-  (let [runners (retrieve-all-race-runners race)
+  (let [runners (retrieve-all-rbest-race-runners race)
         wetherby-runners (utils/get-wetherby-runners runners)]
     (if (not-empty runners)
       (do
