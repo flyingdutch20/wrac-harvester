@@ -44,11 +44,11 @@
 
 (defn retrieve-race
   [url]
-  (-> (client/get url) :body parse as-hickory))
+  (-> (slurp url) parse as-hickory))
 
-;(retrieve-race "https://racebest.com/results/q66zt")
-;(client/get "https://racebest.com/results/q66zt")
-
+(retrieve-race "https://racebest.com/results/q66zt")
+;(slurp "https://racebest.com/results/q66zt")
+;(-> (slurp "https://racebest.com/results/q66zt") :document parse as-hickory)
 
 ;(retrieve-race "https://racebest.com/results/ug9s7")
 
@@ -167,7 +167,7 @@
 
 (defn create-race-output
   [race]
-  (let [runners (retrieve-all-race-runners race)
+  (let [runners (retrieve-all-rbest-race-runners race)
         wetherby-runners (utils/get-wetherby-runners runners)]
     (if (not-empty runners)
       (do
