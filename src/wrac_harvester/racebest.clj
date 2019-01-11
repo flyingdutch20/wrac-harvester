@@ -198,7 +198,7 @@
 (defn output-wrac-rbest-results-for-date
   [date]
   (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting https://racebest.com"))
-  (let [urls (utils/filter-site-urls-for-date retrieve-rbest-urls date)]
+  (let [urls (utils/filter-site-urls-for-date retrieve-urls date)]
     (doseq [url urls]
 ;     (println (str "hello " (:url url)))
       (create-race-output (retrieve-race (str rbest-base-url "/" (:url url))))))
@@ -213,12 +213,6 @@
                (catch Exception e false))]
     (if date
       (output-wrac-rbest-results-for-date date))))
-
-(defn output-wrac-rbest-results
-  []
-  (output-wrac-rbest-results-for-date-string (str "01 Jan " current-year)))
-
-;(output-wrac-rbest-results)
 
 ;(try (utils/extract-date-from "all") (catch Exception e false))
 
@@ -237,6 +231,12 @@
   (output-wrac-rbest-results-for-number-of-weeks 2))
 
 ;(output-wrac-rbest-results-for-last-two-weeks)
+
+(defn output-wrac-rbest-results
+  []
+  (output-wrac-rbest-results-for-number-of-weeks 52))
+
+;(output-wrac-rbest-results)
 
 
 
