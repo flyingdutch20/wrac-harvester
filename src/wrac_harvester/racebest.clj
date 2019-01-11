@@ -13,6 +13,7 @@
 (def rbest-index (-> (client/get (str rbest-base-url "/results")) :body parse as-hickory))
 (def custom-formatter (fdt/formatter "d MMM yyyy"))
 
+
 ;(s/select (s/child (s/tag :tr)) rbest-index)
 ;(-> (nth (s/select (s/child (s/tag :tr)) rbest-index) 3) :content first :content first)
 ;(-> (nth (s/select (s/child (s/tag :tr)) rbest-index) 3) :content second :content first :content first :attrs :href)
@@ -46,7 +47,11 @@
   [url]
   (-> (slurp url) parse as-hickory))
 
-(retrieve-race "https://racebest.com/results/q66zt")
+;(retrieve-race "https://racebest.com/results/q66zt")
+;(client/get "https://racebest.com/results/q66zt")
+;(slurp "https://racebest.com/results/q66zt")
+
+;(retrieve-race "https://racebest.com/results/q66zt")
 ;(slurp "https://racebest.com/results/q66zt")
 ;(-> (slurp "https://racebest.com/results/q66zt") :document parse as-hickory)
 
@@ -154,7 +159,7 @@
 
 (defn retrieve-race-name
   [race]
-  (let [header (retrieve-race-header race)]
+  (let [header (retrieve-rbest-race-header race)]
     (str
       "Racebest - "
       (:date header)
