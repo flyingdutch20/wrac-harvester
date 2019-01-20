@@ -1,14 +1,19 @@
 (ns wrac-harvester.core
   (:use [hickory.core])
   (:require
-            [wrac-harvester.runbritain :as rb]
-            [wrac-harvester.ukresults :as ukr])
+            [wrac-harvester.multiple :as all]
+;            [wrac-harvester.runbritain :as rb]
+;            [wrac-harvester.ukresults :as ukr]
+    )
   (:gen-class))
 
 (defn harvest-for-number-of-weeks
   [weeks]
-  (rb/output-wrac-rb-results-for-number-of-weeks weeks)
-  (ukr/output-wrac-ukr-results-for-number-of-weeks weeks))
+  (all/output-wrac-rb-results-for-number-of-weeks weeks)
+  (all/output-wrac-ukr-results-for-number-of-weeks weeks)
+;  (rb/output-wrac-rb-results-for-number-of-weeks weeks)
+;  (ukr/output-wrac-ukr-results-for-number-of-weeks weeks)
+  )
 
 (defn harvest-for-last-two-weeks
   []
