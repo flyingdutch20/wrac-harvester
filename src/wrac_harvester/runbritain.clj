@@ -8,7 +8,7 @@
             [clojure.java.io :as io]
             [wrac-harvester.utils :as utils]))
 
-
+(comment
 (def rb-base-url "https://www.runbritainrankings.com")
 (def rb-index (-> (client/get (str rb-base-url "/results/resultslookup.aspx")) :body parse as-hickory))
 
@@ -213,6 +213,6 @@
 
 ;(output-wrac-rb-results-for-date-string "16 Dec 2018")
 
-
+)
 
 ; comment for debugger

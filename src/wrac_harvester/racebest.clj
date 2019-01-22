@@ -8,7 +8,7 @@
             [clojure.java.io :as io]
             [wrac-harvester.utils :as utils]))
 
-
+(comment
 (def rbest-base-url "http://racebest.com")
 (def rbest-index (-> (client/get (str rbest-base-url "/results")) :body parse as-hickory))
 (def custom-formatter (fdt/formatter "d MMM yyyy"))
@@ -238,6 +238,6 @@
 
 ;(output-wrac-rbest-results)
 
-
+)
 
 ; last line to avoid debug below eof

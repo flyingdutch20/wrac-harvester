@@ -79,7 +79,7 @@
   (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) ukr-race))))
 
 ;(map #(first (:content %)) (s/select (s/child (s/tag :td)) (first (retrieve-lines (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html")))))
-;(.indexOf (into [] my-head) "Pos")
+;(.indexOf (into [] (map #(first (:content %)) (s/select (s/child (s/tag :td)) (first (retrieve-lines (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html")))))) "Pos")
 ;(s/select (s/tag :th) (first (retrieve-lines (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html"))))
 
 (defn make-header-vec
@@ -197,12 +197,10 @@
   (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Harvesting http://ukresults.net"))
   (let [urls (utils/filter-site-urls-for-date retrieve-ukr-urls date)]
     (doseq [url urls]
-;     (println (str "hello " (:url url)))
       (create-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url url))))))
   (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting http://ukresults.net"))
   )
-;(retrieve-ukr-urls)
-;(utils/filter-site-urls-for-date retrieve-ukr-urls (utils/extract-date-from "01 Jan 2019"))
+
 
 (defn output-wrac-ukr-results-for-date-string
   [date-string]

@@ -7,8 +7,9 @@
 
 (defn harvest-for-number-of-weeks
   [weeks]
-  (rb/output-wrac-rb-results-for-number-of-weeks weeks)
-  (ukr/output-wrac-ukr-results-for-number-of-weeks weeks))
+;  (rb/output-wrac-rb-results-for-number-of-weeks weeks)
+;  (ukr/output-wrac-ukr-results-for-number-of-weeks weeks)
+  )
 
 (defn harvest-for-last-two-weeks
   []
