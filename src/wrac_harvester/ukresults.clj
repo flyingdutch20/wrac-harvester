@@ -1,17 +1,18 @@
 (ns wrac-harvester.ukresults
-  (:use [hickory.core])
+  (:use     [hickory.core])
   (:require [hickory.select :as s]
+            [clojure.string :as string]
             [clj-http.client :as client]
             [clj-time.core :as dt]
             [clj-time.format :as fdt]
-            [clojure.string :as string]
             [clojure.java.io :as io]
             [wrac-harvester.utils :as utils]))
 
 
 (def ukr-base-url "http://ukresults.net")
 (def current-year (dt/year (dt/today)))
-(def ukr-index (-> (client/get (str ukr-base-url "/" current-year "/index.html")) :body parse as-hickory))
+(def ukr-index-url (str ukr-base-url "/" current-year "/index.html"))
+(def ukr-index (-> (client/get ukr-index-url) :body parse as-hickory))
 (def custom-formatter (fdt/formatter "dd MMMM yyyy"))
 
 
@@ -49,7 +50,7 @@
 
 (defn retrieve-ukr-race
   [url]
-  (-> (client/get url) :body parse as-hickory))
+  (-> (slurp url) :body parse as-hickory))
 
 ;(retrieve-ukr-race "http://ukresults.net/2018/dalby.html")
 ;(retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html")

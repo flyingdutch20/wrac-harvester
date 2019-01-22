@@ -1,10 +1,10 @@
 (ns wrac-harvester.racebest
-  (:use [hickory.core])
+  (:use     [hickory.core])
   (:require [hickory.select :as s]
+            [clojure.string :as string]
             [clj-http.client :as client]
             [clj-time.core :as dt]
             [clj-time.format :as fdt]
-            [clojure.string :as string]
             [clojure.java.io :as io]
             [wrac-harvester.utils :as utils]))
 
@@ -45,7 +45,7 @@
 
 (defn retrieve-race
   [url]
-  (-> (slurp url) parse as-hickory))
+  (:table (as-hickory (parse (slurp url)))))
 
 ;(retrieve-race "https://racebest.com/results/q66zt")
 ;(client/get "https://racebest.com/results/q66zt")
@@ -56,6 +56,8 @@
 ;(-> (slurp "https://racebest.com/results/q66zt") :document parse as-hickory)
 
 ;(retrieve-race "https://racebest.com/results/ug9s7")
+
+(comment
 
 (defn retrieve-rbest-race-header
   [race]

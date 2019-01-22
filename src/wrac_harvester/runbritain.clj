@@ -1,23 +1,23 @@
 (ns wrac-harvester.runbritain
-  (:use [hickory.core])
+  (:use     [hickory.core])
   (:require [hickory.select :as s]
+            [clojure.string :as string]
             [clj-http.client :as client]
             [clj-time.core :as dt]
             [clj-time.format :as fdt]
-            [clojure.string :as string]
             [clojure.java.io :as io]
             [wrac-harvester.utils :as utils]))
 
 (comment
 (def rb-base-url "https://www.runbritainrankings.com")
-(def rb-index (-> (client/get (str rb-base-url "/results/resultslookup.aspx")) :body parse as-hickory))
 
 ;(rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))))
 
 (defn retrieve-rb-urls
   "Returns a vector of maps for each sub-category on the current category"
   []
-  (let [links (rest (s/select (s/child (s/tag :tr))  (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))))]
+  (let [rb-index (-> (client/get (str rb-base-url "/results/resultslookup.aspx") :body parse as-hickory))
+        links (rest (s/select (s/child (s/tag :tr))  (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))))]
     (vec
      (map
       #(hash-map :date (utils/extract-date-from (-> % :content second :content first :content first))
@@ -40,7 +40,7 @@
 
 (defn retrieve-rb-race
   [url]
-  (-> (client/get url) :body parse as-hickory))
+  (-> (slurp url) :body parse as-hickory))
 
 (defn retrieve-rb-race-header
   [rb-race]
