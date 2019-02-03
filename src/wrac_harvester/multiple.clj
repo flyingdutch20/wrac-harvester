@@ -459,7 +459,7 @@
   []
   (output-wrac-ukr-results-for-number-of-weeks 2))
 
-(output-wrac-ukr-results-for-last-two-weeks)
+;(output-wrac-ukr-results-for-last-two-weeks)
 
 
 
@@ -501,6 +501,7 @@
           (retrieve-rbest-urls)))
 
 ;(utils/filter-site-urls-for-date retrieve-rbest-urls (dt/date-time 2018 11 23) )
+;(utils/filter-site-urls-for-date retrieve-rbest-urls (dt/date-time 2019 01 15) )
 
 (defn retrieve-rbest-race
   [url]
@@ -511,30 +512,37 @@
 ;(:content (first (:content (second (:content (retrieve-rbest-race "https://racebest.com/results/q66zt"))))))
 ;(first (:content (first (s/select (s/tag :title) (retrieve-rbest-race "https://racebest.com/results/q66zt")))))
 ;(hc/as-hickory (hc/parse (:body (client/get "https://racebest.com/results/q66zt"))))
-;(slurp "https://racebest.com/results/q66zt")
+;(hc/as-hickory (hc/parse (:body (client/get "https://racebest.com/results/eyhu9"))))
 
 ;(retrieve-rbest-race "https://racebest.com/results/q66zt")
 ;(slurp "https://racebest.com/results/q66zt")
 ;(-> (slurp "https://racebest.com/results/q66zt") :document parse as-hickory)
 
 ;(retrieve-rbest-race "https://racebest.com/results/ug9s7")
+;(retrieve-rbest-race "https://racebest.com/results/eyhu9")
 
-(comment
 
-; this one can't be done as the race itself doesn't have the date. The index does have the date and title
+; the race itself doesn't have the date. The index does have the date and title
+
 (defn retrieve-rbest-race-header
-  [race]
+  [race date]
     (hash-map :name (-> (s/select (s/tag :title) race) first :content first)
-              :date (-> (s/select (s/tag :h3) race) first :content first)))
+              :date (fdt/unparse rbest-custom-formatter date)))
 
-;(-> (s/select (s/tag :h3) (retrieve-rbest-race "https://racebest.com/results/q66zt")) first :content first)
 
-;(retrieve-rbest-race-header (retrieve-rbest-race "https://racebest.com/results/q66zt"))
-;(:content (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-rbest-race "https://racebest.com/results/q66zt"))))
-;(:content (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-rbest-race "https://racebest.com/results/q66zt"))))
-;(first (:content (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-rbest-race "https://racebest.com/results/q66zt")))))
+;(retrieve-rbest-race-header (retrieve-rbest-race "https://racebest.com/results/q66zt") (dt/date-time 2019 01 15))
 
-;(first (rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) (retrieve-rbest-race "https://racebest.com/results/q66zt"))))))
+;(s/select (s/class :hidden-phone) (first (s/select (s/child (s/tag :thead)) (retrieve-rbest-race "https://racebest.com/results/q66zt"))))
+
+
+;headings
+;(map #(-> % :content first)
+;     (s/select (s/class :hidden-phone)
+;               (first (s/select (s/child (s/tag :thead))
+;                                (retrieve-rbest-race "https://racebest.com/results/q66zt")))))
+
+;race lines in hickory format
+;(:content (first (s/select (s/tag :tbody) (retrieve-rbest-race "https://racebest.com/results/q66zt"))))
 
 
 (defn filter-rbest-race-lines
@@ -544,53 +552,57 @@
 
 (defn retrieve-rbest-lines
   [race]
-  (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/class :sortable) s/first-child) race))))
+  (:content (first (s/select (s/tag :tbody) race))))
 
+
+
+;(retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt"))
 ;(map #(first (:content %)) (s/select (s/child (s/tag :td)) (first (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt")))))
 ;(.indexOf (into [] my-head) "Pos")
 ;(s/select (s/tag :th) (first (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt"))))
 
+
 (defn make-rbest-header-vec
-  [race-lines]
- (into []
-    (if (empty? (s/select (s/tag :th) (first race-lines)))
-      (map #(first (:content %)) (s/select (s/child (s/tag :td)) (first race-lines)))
-      (map #(first (:content %)) (s/select (s/child (s/tag :th)) (first race-lines))))))
+  [race]
+  (into []
+  (map #(-> % :content first)
+     (s/select (s/class :hidden-phone)
+               (first (s/select (s/child
+                                  (s/tag :thead))
+                                race))))))
 
-;(make-rbest-header-vec (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt")))
-;(make-rbest-header-vec (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt")))
-;(make-rbest-header-vec (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt")))
-;(reduce str "" (rest "hello"))
-;(str (first "hello"))
+;(make-rbest-header-vec (retrieve-rbest-race "https://racebest.com/results/q66zt"))
 
-;(def my-lines (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt")))
-;(def my-header (make-rbest-header-vec my-lines))
+;(def my-rbest-lines (retrieve-rbest-lines (retrieve-rbest-race "https://racebest.com/results/q66zt")))
+;(def my-rbest-header (make-rbest-header-vec (retrieve-rbest-race "https://racebest.com/results/q66zt")))
+
 
 (defn get-rbest-value-for
   [field line header]
   (-> (nth (:content line) (.indexOf header field)) :content first))
 
-;(get-rbest-value-for "Pos" (first (rest my-lines)) my-header)
+;(get-rbest-value-for "Name" (second my-rbest-lines) my-rbest-header)
+
 
 (defn map-6-rbest-col
   [line header]
-  (hash-map :pos   (get-value-for "Pos" line header)
-             :gun   (get-value-for "Time" line header)
-             :chip  (get-value-for "Time" line header)
-             :name  (get-value-for "Name" line header)
-             :cat   (reduce str "" (rest (get-value-for "Cat" line header)))
-             :sex   (str (first (get-value-for "Cat" line header)))
-             :club  (.toLowerCase (get-value-for "Club" line header))))
+  (hash-map :pos   (get-rbest-value-for "Position" line header)
+             :gun   (get-rbest-value-for "Time" line header)
+             :chip  (get-rbest-value-for "Time" line header)
+             :name  (get-rbest-value-for "Name" line header)
+             :cat   (reduce str "" (rest (get-rbest-value-for "Category" line header)))
+             :sex   (str (first (get-rbest-value-for "Category" line header)))
+             :club  (.toLowerCase (get-rbest-value-for "Club" line header))))
 
 (defn map-9-rbest-col
   [line header]
-  (hash-map :pos   (get-value-for "Pos" line header)
-             :gun   (get-value-for "Time" line header)
-             :chip  (get-value-for "Time" line header)
-             :name  (get-value-for "Name" line header)
-             :cat   (get-value-for "Cat" line header)
-             :sex   (if (empty? (get-value-for "F" line header)) "M" "F")
-             :club  (.toLowerCase (get-value-for "Club" line header))))
+  (hash-map :pos   (get-rbest-value-for "Position" line header)
+             :gun   (get-rbest-value-for "Time" line header)
+             :chip  (get-rbest-value-for "Time" line header)
+             :name  (get-rbest-value-for "Name" line header)
+             :cat   (reduce str "" (rest (get-rbest-value-for "Category" line header)))
+             :sex   (str (first (get-rbest-value-for "Category" line header)))
+             :club  (.toLowerCase (get-rbest-value-for "Club" line header))))
 
 (defn map-rbest-empty
   [line header]
@@ -605,8 +617,8 @@
 (defn retrieve-all-rbest-race-runners
   [race]
   (let [all (retrieve-rbest-lines race)
-       header (make-rbest-header-vec all)
-        filtered (filter-rbest-race-lines (rest all) (count header))]
+       header (make-rbest-header-vec race)
+        filtered (filter-rbest-race-lines all (count header))]
     (vec
        (map
         #(case (count header)
@@ -623,8 +635,8 @@
 ;(utils/get-wetherby-runners (retrieve-all-rbest-race-runners (retrieve-rbest-race "https://racebest.com/results/q66zt")))
 
 (defn retrieve-rbest-race-name
-  [race]
-  (let [header (retrieve-rbest-race-header race)]
+  [race date]
+  (let [header (retrieve-rbest-race-header race date)]
     (str
       "Racebest - "
       (:date header)
@@ -632,22 +644,22 @@
       (:name header)
     )))
 
-;(retrieve-rbest-race-name (retrieve-rbest-race "https://racebest.com/results/q66zt"))
+;(retrieve-rbest-race-name (retrieve-rbest-race "https://racebest.com/results/q66zt") (dt/date-time 2019 01 15))
 ;(retrieve-rbest-race-name (retrieve-rbest-race "https://racebest.com/results/q66zt"))
 
 (defn create-rbest-race-output
-  [race]
+  [race date]
   (let [runners (retrieve-all-rbest-race-runners race)
         wetherby-runners (utils/get-wetherby-runners runners)]
     (if (not-empty runners)
       (do
-        (println (str "Processing: " (retrieve-rbest-race-name race)))
+        (println (str "Processing: " (retrieve-rbest-race-name race date)))
         (if (not-empty wetherby-runners)
-          (let [filename (str "c:/output/" (retrieve-rbest-race-name race) ".csv")]
+          (let [filename (str "c:/output/" (retrieve-rbest-race-name race date) ".csv")]
             (io/make-parents filename)
             (spit filename
                   (str
-                    "," (retrieve-rbest-race-name race) " - " (count runners) " runners" "\n"
+                    "," (retrieve-rbest-race-name race date) " - " (count runners) " runners" "\n"
                     "," "First man " (utils/print-winner (utils/first-male runners)) " - first woman " (utils/print-winner (utils/first-female runners)) "\n"
                     "\n"
                     ",Pos,Name,Cat,Time\n"
@@ -655,7 +667,7 @@
                     "\n"))
             (println (str "Created: " filename))))))))
 
-;(create-rbest-race-output (retrieve-rbest-race "https://racebest.com/results/q66zt"))
+;(create-rbest-race-output (retrieve-rbest-race "https://racebest.com/results/q66zt") (dt/date-time 2019 01 15))
 ;(create-rbest-race-output (retrieve-rbest-race "https://racebest.com/results/q66zt"))
 ;(create-rbest-race-output (retrieve-rbest-race "https://racebest.com/results/q66zt"))
 ;(create-rbest-race-output (retrieve-rbest-race (str rbest-base-url "/" (:url (first (retrieve-rbest-urls))))))
@@ -666,7 +678,7 @@
   (let [urls (utils/filter-site-urls-for-date retrieve-rbest-urls date)]
     (doseq [url urls]
 ;     (println (str "hello " (:url url)))
-      (create-rbest-race-output (retrieve-rbest-race (str rbest-base-url "/" (:url url))))))
+      (create-rbest-race-output (retrieve-rbest-race (str rbest-base-url "/" (:url url))) (:date url))))
   (println (str (fdt/unparse (fdt/formatters :hour-minute) nil) " - Finished harvesting https://racebest.com"))
   )
 ;(retrieve-rbest-urls)
@@ -703,6 +715,7 @@
 
 ;(output-wrac-rbest-results)
 
-)
+
+
 
 ; last line to avoid debug below eof

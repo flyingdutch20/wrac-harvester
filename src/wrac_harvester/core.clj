@@ -11,6 +11,7 @@
   [weeks]
   (all/output-wrac-rb-results-for-number-of-weeks weeks)
   (all/output-wrac-ukr-results-for-number-of-weeks weeks)
+  (all/output-wrac-rbest-results-for-number-of-weeks weeks)
 ;  (rb/output-wrac-rb-results-for-number-of-weeks weeks)
 ;  (ukr/output-wrac-ukr-results-for-number-of-weeks weeks)
   )
