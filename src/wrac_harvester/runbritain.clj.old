@@ -8,7 +8,7 @@
             [clojure.java.io :as io]
             [wrac-harvester.utils :as utils]))
 
-(comment
+(comment 
 (def rb-base-url "https://www.runbritainrankings.com")
 
 ;(rest (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_dgMeetings) s/first-child) rb-index))))
