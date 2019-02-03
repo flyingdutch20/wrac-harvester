@@ -65,14 +65,14 @@
 ;(retrieve-rb-race-pages (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=247241")) ; 6 pages
 ;(retrieve-rb-race-pages (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ; 2 pages
 
-(defn filter-race-lines
+(defn filter-rb-race-lines
   [race-lines]
     (filter #(and
                       (:content (second (:content %)))
                       (> (count (:content (second (:content %)))) 2))
             race-lines))
 
-(defn get-header-line
+(defn get-rb-header-line
   [race-lines]
   (first
     (filter #(and
@@ -81,17 +81,17 @@
             race-lines)))
 
 
-(defn has-chip?
+(defn rb-has-chip?
   [lines]
-  (let [line (get-header-line lines)]
+  (let [line (get-rb-header-line lines)]
   (= (-> (nth (:content line) 4) :content first :content first) "Chip")))
 
 
 (defn retrieve-rb-race-runners
   [rb-race]
   (let [lines (s/select (s/child (s/tag :tr)) (first (s/select (s/child (s/id :cphBody_gvP) s/first-child) rb-race)))
-        chip (if (has-chip? lines) 1 0)
-        filtered (filter-race-lines lines)]
+        chip (if (rb-has-chip? lines) 1 0)
+        filtered (filter-rb-race-lines lines)]
     (vec
        (map
         #(hash-map :pos   (-> (nth (:content %) 2) :content first)
@@ -145,7 +145,7 @@
       (-> header first :content first)
     )))
 
-;(retrieve-race-name (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
+;(retrieve-rb-race-name (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023"))
 
 (defn create-rb-race-output
   [rb-race]
@@ -168,8 +168,8 @@
             (println (str "Created: " filename))))))))
 
 
-;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ;Dalby Dash
-;(create-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")) ;Wetherby 10k
+;(create-rb-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=261023")) ;Dalby Dash
+;(create-rb-race-output (retrieve-rb-race "https://www.runbritainrankings.com/results/results.aspx?meetingid=251411")) ;Wetherby 10k
 
 
 ;(retrieve-rb-urls-for-date rb-index (dt/date-time 2018 11 23))
@@ -307,17 +307,23 @@
 ;(make-ukr-header-vec (retrieve-ukr-lines (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html")))
 ;(make-ukr-header-vec (retrieve-ukr-lines (retrieve-ukr-race "http://ukresults.net/2019/schof.html")))
 ;(make-ukr-header-vec (retrieve-ukr-lines (retrieve-ukr-race "http://ukresults.net/2018/dalby.html")))
+;(make-ukr-header-vec (retrieve-ukr-lines (retrieve-ukr-race "http://ukresults.net/2019/3halls.html")))
 ;(reduce str "" (rest "hello"))
 ;(str (first "hello"))
 
-;(def my-lines (retrieve-ukr-lines (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html")))
+;(def my-lines (retrieve-ukr-lines (retrieve-ukr-race "http://ukresults.net/2019/3halls.html")))
 ;(def my-header (make-ukr-header-vec my-lines))
 
 (defn get-ukr-value-for
   [field line header]
-  (-> (nth (:content line) (.indexOf header field)) :content first))
+  (let [idx (.indexOf header field)]
+    (if (pos? idx)
+      (-> (nth (:content line) idx) :content first)
+      "")))
 
 ;(get-ukr-value-for "Pos" (first (rest my-lines)) my-header)
+;(try (.indexOf my-header "Cat") (catch Exception e ""))
+;(.indexOf my-header "Cat")
 
 (defn map-ukr-6-col
   [line header]
@@ -406,6 +412,11 @@
 ;(create-ukr-race-output (retrieve-ukr-race "http://ukresults.net/2019/morpeth11k.html"))
 ;(create-ukr-race-output (retrieve-ukr-race "http://ukresults.net/2019/schof.html"))
 ;(create-ukr-race-output (retrieve-ukr-race (str ukr-base-url "/" current-year "/" (:url (first (retrieve-ukr-urls))))))
+;(create-ukr-race-output (retrieve-ukr-race "http://ukresults.net/2019/elhfun.html"))
+;(create-ukr-race-output (retrieve-ukr-race "http://ukresults.net/2019/sheffxc.pdf"))
+;(create-ukr-race-output (retrieve-ukr-race "http://ukresults.net/2019/3halls.html"))
+
+
 
 (defn output-wrac-ukr-results-for-date
   [date]
@@ -448,7 +459,7 @@
   []
   (output-wrac-ukr-results-for-number-of-weeks 2))
 
-;(output-wrac-ukr-results-for-last-two-weeks)
+(output-wrac-ukr-results-for-last-two-weeks)
 
 
 
