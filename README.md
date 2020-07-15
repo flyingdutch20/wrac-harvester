@@ -1,6 +1,7 @@
 # wrac-harvester
 
-FIXME: description
+Collecting race results of WRAC members from various running websites
+Built in Clojure
 
 ## Installation
 
